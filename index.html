@@ -1,0 +1,2219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Martyna — Content Creator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+
+<script>
+// Tweak defaults – edited live by the host when the user toggles Tweaks
+const TWEAKS = /*EDITMODE-BEGIN*/{
+  "theme": "swiss",
+  "accent": "#E11D48",
+  "fontPair": "serif-grotesk",
+  "hero": "editorial",
+  "dark": false,
+  "lang": "en"
+}/*EDITMODE-END*/;
+</script>
+
+<style>
+  :root {
+    --bg: #F6F2EC;
+    --bg-2: #EFEAE1;
+    --ink: #131110;
+    --ink-2: #3B3531;
+    --muted: #6B635C;
+    --line: #1311101A;
+    --card: #FFFFFF;
+    --accent: #FF5B2E;
+    --accent-ink: #FFFFFF;
+
+    --f-display: 'Instrument Serif', 'Times New Roman', serif;
+    --f-body: 'Geist', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --f-mono: 'Geist Mono', ui-monospace, monospace;
+
+    --r-sm: 6px;
+    --r-md: 14px;
+    --r-lg: 22px;
+  }
+  :root.dark {
+    --bg: #0E0D0C;
+    --bg-2: #171613;
+    --ink: #F4EFE8;
+    --ink-2: #CDC6BC;
+    --muted: #8A8178;
+    --line: #F4EFE81A;
+    --card: #1A1815;
+  }
+
+  /* theme: swiss */
+  :root[data-theme="swiss"] {
+    --bg: #EEEEEC;
+    --bg-2: #E3E3DF;
+    --ink: #0B0B0C;
+    --ink-2: #2A2A2E;
+    --muted: #5A5A60;
+    --line: #0B0B0C1F;
+    --card: #FFFFFF;
+  }
+  :root[data-theme="swiss"].dark {
+    --bg: #0B0B0C;
+    --bg-2: #141417;
+    --ink: #F2F2EF;
+    --ink-2: #CFCFCB;
+    --muted: #86868B;
+    --line: #F2F2EF1F;
+    --card: #18181B;
+  }
+
+  /* theme: warm */
+  :root[data-theme="warm"] {
+    --bg: #F2E9DC;
+    --bg-2: #E8DDCB;
+    --ink: #2A1E14;
+    --ink-2: #4A3A2C;
+    --muted: #7A6A5C;
+    --line: #2A1E141F;
+    --card: #FBF4E8;
+  }
+  :root[data-theme="warm"].dark {
+    --bg: #1C1410;
+    --bg-2: #241A14;
+    --ink: #F2E9DC;
+    --ink-2: #D7C8B5;
+    --muted: #9B8B7A;
+    --line: #F2E9DC1F;
+    --card: #2A1E16;
+  }
+
+  /* theme: forest — deep green + cream + mustard (inspired by Han Nguyen portfolio) */
+  :root[data-theme="forest"] {
+    --bg: #F6EFDF;
+    --bg-2: #EBE2CB;
+    --ink: #1E3027;
+    --ink-2: #2E4A3B;
+    --muted: #6B7C6E;
+    --line: #1E30271F;
+    --card: #FBF5E5;
+    --accent: #F5A524;
+    --accent-ink: #1E3027;
+    --forest-dark: #1E3027;
+    --forest-deep: #16251D;
+    --forest-cream: #F6EFDF;
+    --forest-mustard: #F5A524;
+    --forest-orange: #E97C3C;
+  }
+  :root[data-theme="forest"].dark {
+    --bg: #16251D;
+    --bg-2: #1E3027;
+    --ink: #F6EFDF;
+    --ink-2: #D7CFB9;
+    --muted: #8FA093;
+    --line: #F6EFDF1F;
+    --card: #1E3027;
+    --forest-dark: #F6EFDF;
+    --forest-deep: #F6EFDF;
+    --forest-cream: #16251D;
+  }
+
+  /* font pairs */
+  :root[data-fontpair="serif-grotesk"] {
+    --f-display: 'Instrument Serif', serif;
+    --f-body: 'Geist', Helvetica, sans-serif;
+  }
+  :root[data-fontpair="grotesk-mono"] {
+    --f-display: 'Space Grotesk', Helvetica, sans-serif;
+    --f-body: 'Space Grotesk', Helvetica, sans-serif;
+  }
+  :root[data-fontpair="newsreader-dm"] {
+    --f-display: 'Newsreader', serif;
+    --f-body: 'DM Sans', Helvetica, sans-serif;
+  }
+  :root[data-fontpair="bricolage"] {
+    --f-display: 'Bricolage Grotesque', Helvetica, sans-serif;
+    --f-body: 'DM Sans', Helvetica, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    transition: background .4s ease, color .4s ease;
+  }
+  a { color: inherit; text-decoration: none; }
+  img, svg { display: block; max-width: 100%; }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 40;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px;
+    backdrop-filter: blur(14px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid transparent;
+    transition: border-color .3s, background .3s;
+  }
+  .nav.scrolled { border-bottom-color: var(--line); }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--f-display); font-size: 22px; letter-spacing: -0.01em;
+  }
+  .brand-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent);
+  }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    font-size: 14px; color: var(--ink-2);
+    position: relative; padding: 6px 0;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a::after {
+    content: ''; position: absolute; left: 0; right: 100%; bottom: 0;
+    height: 1px; background: var(--ink);
+    transition: right .3s ease;
+  }
+  .nav-links a:hover::after { right: 0; }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .mode-toggle, .cta {
+    font-family: var(--f-body); font-size: 13px;
+    border: 1px solid var(--line);
+    background: transparent; color: var(--ink);
+    padding: 9px 14px; border-radius: 999px;
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: all .2s ease;
+  }
+  .mode-toggle:hover { background: var(--bg-2); }
+  .cta {
+    background: var(--ink); color: var(--bg);
+    border-color: var(--ink);
+  }
+  .cta:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+  /* ---------- Layout ---------- */
+  main { max-width: 1440px; margin: 0 auto; padding: 0 32px; }
+  section { padding: 80px 0; position: relative; }
+
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted);
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before {
+    content: ''; width: 22px; height: 1px; background: var(--muted);
+  }
+
+  .section-title {
+    font-family: var(--f-display);
+    font-size: clamp(42px, 6vw, 84px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    margin: 18px 0 40px;
+    font-weight: 400;
+  }
+  .section-title em {
+    font-style: italic; color: var(--accent);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 40px 0 60px; min-height: calc(100vh - 68px); display: flex; flex-direction: column; justify-content: center; }
+
+  /* Hero variant: split */
+  .hero.split {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 48px;
+    align-items: end;
+  }
+  .hero.split .hero-headline {
+    font-family: var(--f-display);
+    font-size: clamp(56px, 9vw, 150px);
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    font-weight: 400;
+    margin: 0;
+  }
+  .hero.split .hero-headline em { font-style: italic; color: var(--accent); }
+  .hero-meta {
+    display: flex; flex-direction: column; gap: 22px;
+    padding-bottom: 14px;
+  }
+  .hero-portrait {
+    aspect-ratio: 4/5;
+    background: var(--bg-2);
+    border-radius: var(--r-lg);
+    position: relative; overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .hero-tag {
+    font-family: var(--f-mono); font-size: 12px;
+    color: var(--muted);
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .hero-tag strong { color: var(--ink); font-weight: 500; }
+  .hero-pills {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .pill {
+    border: 1px solid var(--line);
+    padding: 6px 12px; border-radius: 999px;
+    font-size: 12px; color: var(--ink-2);
+    font-family: var(--f-mono);
+  }
+  .pill.solid { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+  /* Hero variant: centered */
+  .hero.centered { text-align: center; align-items: center; }
+  .hero.centered .hero-stage {
+    display: flex; flex-direction: column; align-items: center; gap: 32px;
+    max-width: 1000px; margin: 0 auto;
+  }
+  .hero.centered .hero-headline {
+    font-family: var(--f-display);
+    font-size: clamp(64px, 10vw, 180px);
+    line-height: 0.9; letter-spacing: -0.03em; font-weight: 400;
+    margin: 0;
+  }
+  .hero.centered .hero-headline em { font-style: italic; color: var(--accent); }
+  .hero.centered .hero-sub {
+    font-size: 18px; color: var(--ink-2); max-width: 560px;
+  }
+  .hero.centered .hero-avatar {
+    width: 88px; height: 88px; border-radius: 50%;
+    background: var(--bg-2); border: 1px solid var(--line);
+    position: relative; overflow: hidden;
+  }
+  .hero.centered .hero-row {
+    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+  }
+
+  /* Hero variant: editorial (Angèle/Han inspired) */
+  .hero.editorial {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 24px 0;
+    height: calc(100vh - 68px);
+  }
+  .ed-hello {
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: center;
+  }
+  .ed-portrait {
+    position: relative;
+    aspect-ratio: 4/5;
+    max-height: calc(100vh - 120px);
+    border-radius: var(--r-lg);
+    overflow: visible;
+    background: var(--accent);
+  }
+  .ed-portrait .portrait-inner {
+    position: absolute; inset: 0;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    background:
+      repeating-linear-gradient(45deg, transparent 0 14px, color-mix(in oklab, var(--ink) 8%, transparent) 14px 15px),
+      linear-gradient(135deg, color-mix(in oklab, var(--accent) 80%, var(--ink) 20%), color-mix(in oklab, var(--accent) 40%, var(--bg-2)));
+  }
+  .ed-badge {
+    position: absolute;
+    font-family: var(--f-display); font-weight: 400;
+    background: var(--ink); color: var(--bg);
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-size: 18px;
+    white-space: nowrap;
+    transform: rotate(-6deg);
+    box-shadow: 0 8px 20px -8px color-mix(in oklab, var(--ink) 40%, transparent);
+  }
+  .ed-badge.b1 { top: -18px; right: -22px; background: var(--accent); color: var(--accent-ink); transform: rotate(8deg); font-size: 22px; }
+  .ed-badge.b2 { bottom: 32px; left: -28px; background: var(--card); color: var(--ink); border: 1px solid var(--line); font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; transform: rotate(-8deg); }
+
+  .ed-headline {
+    font-family: var(--f-display);
+    font-size: clamp(52px, 8vw, 130px);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    font-weight: 400;
+    margin: 0 0 28px;
+  }
+  .ed-headline em { font-style: italic; color: var(--accent); }
+  .ed-sub {
+    font-size: 18px; color: var(--ink-2); line-height: 1.55;
+    margin: 0 0 28px; max-width: 560px;
+  }
+  .ed-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+  .ed-search {
+    display: inline-flex; align-items: center; gap: 14px;
+    background: var(--accent); color: var(--accent-ink);
+    padding: 14px 22px; border-radius: 999px;
+    font-family: var(--f-mono); font-size: 13px; letter-spacing: .04em;
+    max-width: 100%;
+    transition: transform .2s ease;
+  }
+  .ed-search:hover { transform: translateY(-2px); }
+  .ed-search-cta { margin-left: auto; font-size: 18px; }
+
+  /* forest theme specific: Han-style oversized ghosted watermark on section titles */
+  :root[data-theme="forest"] .section-title {
+    position: relative;
+  }
+
+
+  .portrait-inner {
+    position: absolute; inset: 0;
+    background: var(--card);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    display: flex; align-items: flex-end; padding: 0;
+  }
+  .portrait-inner img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 10%;
+    display: block;
+  }
+  .portrait-inner .cap { display: none; }
+  
+
+  /* ---------- About ---------- */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px;
+    align-items: start;
+  }
+  .about-copy p {
+    font-family: var(--f-display);
+    font-size: clamp(24px, 2.3vw, 32px);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    font-weight: 400;
+    margin: 0 0 20px;
+    color: var(--ink);
+  }
+  .about-copy p em { font-style: italic; color: var(--accent); }
+  .about-side { display: flex; flex-direction: column; gap: 28px; }
+  .about-side .block { border-top: 1px solid var(--line); padding-top: 16px; }
+  .about-side .block h4 {
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; margin: 0 0 10px; color: var(--muted); font-weight: 500;
+  }
+  .about-side ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .about-side li {
+    display: flex; justify-content: space-between; gap: 12px;
+    font-size: 15px; color: var(--ink-2);
+  }
+  .about-side li span:last-child { color: var(--muted); font-family: var(--f-mono); font-size: 12px; }
+
+  /* ---------- Services ---------- */
+  .services {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line); border-left: 1px solid var(--line);
+  }
+  .service {
+    border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 28px 24px 40px;
+    min-height: 260px;
+    position: relative;
+    display: flex; flex-direction: column; gap: 18px;
+    transition: background .3s;
+    cursor: default;
+  }
+  .service:hover { background: var(--bg-2); }
+  .service .num {
+    font-family: var(--f-mono); font-size: 12px; color: var(--muted); letter-spacing: .08em;
+  }
+  .service h3 {
+    font-family: var(--f-display);
+    font-size: 32px; line-height: 1.05; letter-spacing: -0.01em;
+    font-weight: 400; margin: 0;
+    flex: 1;
+  }
+  .service p {
+    font-size: 14px; color: var(--ink-2); margin: 0;
+    line-height: 1.5;
+  }
+  .service .tool-row {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    padding-top: 10px; border-top: 1px dashed var(--line);
+  }
+  .service .tool {
+    font-family: var(--f-mono); font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* ---------- Work ---------- */
+  .work-head {
+    display: flex; justify-content: space-between; align-items: end;
+    gap: 24px; margin-bottom: 28px;
+  }
+
+  .work-section { padding: 60px 0 60px; border-top: 1px solid var(--line); }
+  .work-section:first-of-type { padding-top: 20px; border-top: none; }
+  .work-section-head {
+    display: flex; justify-content: space-between; align-items: end;
+    gap: 32px; margin-bottom: 12px;
+  }
+  .wsh-left { display: flex; gap: 22px; align-items: start; flex: 1; }
+  .wsh-num {
+    font-family: var(--f-mono); font-size: 12px; letter-spacing: .14em;
+    color: var(--muted);
+    padding-top: 14px;
+    min-width: 36px;
+  }
+  .wsh-title {
+    font-family: var(--f-display);
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1; letter-spacing: -0.02em;
+    margin: 0 0 12px; font-weight: 400;
+    max-width: 680px;
+  }
+  .wsh-title em { font-style: italic; color: var(--accent); }
+  .wsh-sub {
+    font-size: 15px; color: var(--ink-2); margin: 0;
+    max-width: 520px; line-height: 1.5;
+  }
+  .wsh-meta {
+    display: flex; flex-direction: column; gap: 4px; text-align: right;
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted);
+    padding-bottom: 8px;
+    flex-shrink: 0;
+  }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter {
+    font-family: var(--f-mono); font-size: 12px; letter-spacing: .04em;
+    padding: 9px 14px; border-radius: 999px;
+    border: 1px solid var(--line);
+    background: transparent; color: var(--ink-2);
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: all .2s ease;
+  }
+  .filter:hover { color: var(--ink); border-color: var(--ink); }
+  .filter[data-active="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .filter .count {
+    font-size: 10px; opacity: .6;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 18px;
+  }
+
+  .carousel.fits .carousel-controls { display: none; }
+  .carousel.fits .carousel-viewport { overflow-x: hidden; }
+
+  /* ---------- Carousel wrapper ---------- */
+  .carousel { position: relative; }
+  .carousel .carousel-viewport {
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 4px 0 10px;
+    margin: 0 -4px;
+  }
+  .carousel .carousel-viewport::-webkit-scrollbar { display: none; }
+  .carousel .carousel-track {
+    display: flex;
+    gap: 18px;
+    padding: 0 4px;
+    width: max-content;
+  }
+  .carousel .carousel-track .tile {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    width: var(--tile-w, 380px);
+  }
+  /* tile sizing inside carousel — size presets scale the width so the grid still feels varied */
+  .carousel .carousel-track .tile.s-sq { width: 320px; }
+  .carousel .carousel-track .tile.s-md { width: 380px; }
+  .carousel .carousel-track .tile.s-tall { width: 300px; }
+  .carousel .carousel-track .tile.s-lg { width: 560px; }
+  .carousel .carousel-track .tile.s-wide { width: 640px; }
+
+  .carousel-controls {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+    margin-top: 14px;
+  }
+  .carousel-arrows { display: flex; gap: 8px; }
+  .carousel-arrow {
+    width: 42px; height: 42px; border-radius: 50%;
+    border: 1px solid var(--line);
+    background: transparent; color: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .carousel-arrow:hover:not(:disabled) {
+    background: var(--ink); color: var(--bg); border-color: var(--ink);
+  }
+  .carousel-arrow:disabled { opacity: .3; cursor: not-allowed; }
+  .carousel-progress {
+    flex: 1;
+    height: 2px;
+    background: var(--line);
+    position: relative;
+    border-radius: 1px;
+    overflow: hidden;
+  }
+  .carousel-progress-bar {
+    position: absolute; top: 0; left: 0; bottom: 0;
+    background: var(--ink);
+    transition: transform .25s cubic-bezier(.2,.8,.2,1), width .25s;
+    border-radius: 1px;
+  }
+  .carousel-count {
+    font-family: var(--f-mono); font-size: 11px;
+    color: var(--muted); letter-spacing: .06em;
+    min-width: 50px; text-align: right;
+  }
+  .carousel-count b { color: var(--ink); font-weight: 500; }
+
+  /* edge fade to hint more content */
+  .carousel::before, .carousel::after {
+    content: '';
+    position: absolute; top: 0; bottom: 46px;
+    width: 40px;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity .25s;
+  }
+  .carousel::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg), transparent);
+  }
+  .carousel::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg), transparent);
+  }
+  .carousel[data-can-prev="1"]::before { opacity: 1; }
+  .carousel[data-can-next="1"]::after { opacity: 1; }
+  .tile {
+    position: relative;
+    border-radius: var(--r-md);
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid var(--line);
+    background: var(--card);
+    transition: transform .5s cubic-bezier(.2,.7,.2,1), opacity .35s;
+  }
+  .tile.hidden { display: none; }
+  .tile:hover { transform: translateY(-3px); }
+  .tile .media {
+    position: relative;
+    aspect-ratio: var(--ar, 4/5);
+    overflow: hidden;
+  }
+  .tile .media .placeholder {
+    position: absolute; inset: 0;
+  }
+  .tile .tag {
+    position: absolute; top: 12px; left: 12px;
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em;
+    text-transform: uppercase;
+    background: var(--card); color: var(--ink);
+    padding: 6px 8px; border-radius: 4px;
+    z-index: 2;
+  }
+  .tile .info {
+    padding: 16px 18px 18px;
+    display: flex; justify-content: space-between; align-items: start;
+    gap: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .tile .info h4 {
+    font-family: var(--f-display); font-size: 22px; font-weight: 400;
+    margin: 0; letter-spacing: -0.01em; line-height: 1.1;
+  }
+  .tile .info p {
+    font-family: var(--f-mono); font-size: 11px;
+    color: var(--muted); margin: 4px 0 0; letter-spacing: .04em;
+  }
+  .tile .plus {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1px solid var(--line);
+    display: grid; place-items: center;
+    flex-shrink: 0;
+    transition: all .3s ease;
+  }
+  .tile:hover .plus { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); transform: rotate(90deg); }
+  .tile .hover-overlay {
+    position: absolute; inset: 0;
+    display: flex; align-items: end; padding: 20px;
+    background: linear-gradient(to top, color-mix(in oklab, var(--ink) 88%, transparent) 0%, transparent 55%);
+    opacity: 0; transition: opacity .35s ease;
+    z-index: 2;
+  }
+  .tile:hover .hover-overlay { opacity: 1; }
+  .tile .hover-overlay .ho-in {
+    color: var(--bg);
+    transform: translateY(10px);
+    transition: transform .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .tile:hover .hover-overlay .ho-in { transform: translateY(0); }
+  .hover-overlay .ho-in .meta {
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em;
+    text-transform: uppercase;
+    opacity: .75;
+  }
+  .hover-overlay .ho-in .ttl {
+    font-family: var(--f-display); font-size: 26px; line-height: 1.1;
+    margin-top: 6px; font-weight: 400;
+  }
+
+  /* tile sizing presets (asymmetric grid) */
+  .tile.s-md { grid-column: span 4; --ar: 4/5; }
+  .tile.s-lg { grid-column: span 6; --ar: 16/11; }
+  .tile.s-sq { grid-column: span 4; --ar: 1/1; }
+  .tile.s-tall { grid-column: span 3; --ar: 3/5; }
+  .tile.s-wide { grid-column: span 8; --ar: 16/9; }
+
+  /* Placeholder "image" styles — different per category */
+  .ph {
+    position: absolute; inset: 0;
+    display: flex; align-items: end; padding: 18px;
+  }
+  .ph .mono {
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: .08em;
+    text-transform: uppercase;
+    background: color-mix(in oklab, var(--bg) 88%, transparent);
+    color: var(--ink); padding: 6px 9px; border-radius: 4px;
+    backdrop-filter: blur(6px);
+  }
+  .ph-copy { background:
+      linear-gradient(140deg, color-mix(in oklab, var(--accent) 14%, var(--card)), var(--card));
+    overflow: hidden;
+  }
+  .ph-copy::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      linear-gradient(transparent 0 calc(20% - 1px), color-mix(in oklab, var(--ink) 30%, transparent) calc(20% - 1px) 20%, transparent 20% calc(24% - 1px), color-mix(in oklab, var(--ink) 22%, transparent) calc(24% - 1px) 24%, transparent 24% calc(28% - 1px), color-mix(in oklab, var(--ink) 22%, transparent) calc(28% - 1px) 28%, transparent 28% calc(32% - 1px), color-mix(in oklab, var(--ink) 22%, transparent) calc(32% - 1px) 32%, transparent 32%);
+    mask: linear-gradient(black, transparent 75%);
+    opacity: .45;
+  }
+  .ph-copy .quote {
+    font-family: var(--f-display);
+    font-size: clamp(20px, 2vw, 30px);
+    font-style: italic;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    max-width: 86%;
+    position: relative; z-index: 1;
+  }
+  .ph-copy .quote::before { content: '“'; margin-right: 2px; color: var(--accent); }
+  .ph-copy .quote::after { content: '”'; color: var(--accent); }
+
+  /* ---------- Article card (copy tiles) ---------- */
+  .tile.is-article { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); }
+  .tile.is-article .media { aspect-ratio: 16/10; }
+  .tile.is-article .art-thumb {
+    position: absolute; inset: 0;
+    display: flex; align-items: flex-end; padding: 18px;
+    overflow: hidden;
+  }
+  .tile.is-article .art-thumb::before {
+    content:''; position:absolute; inset:0;
+    background: linear-gradient(180deg, transparent 40%, color-mix(in oklab, var(--ink) 70%, transparent));
+  }
+  .tile.is-article .art-thumb .pub {
+    position: relative; z-index: 1;
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: .14em;
+    text-transform: uppercase; color: #fff;
+    background: color-mix(in oklab, var(--ink) 50%, transparent);
+    padding: 5px 9px; border-radius: 4px;
+    backdrop-filter: blur(4px);
+    white-space: nowrap;
+  }
+  .art-thumb-ruff { background: linear-gradient(135deg, #6B5B3F 0%, #A88860 55%, #D9B483 100%); }
+  .art-thumb-ruff::after {
+    content: '🐶'; position: absolute; top: 40%; right: -10px;
+    font-size: 180px; opacity: .18; transform: rotate(-12deg);
+  }
+  .art-thumb-salon { background: linear-gradient(135deg, #2E3A2E 0%, #526553 50%, #BEAF8E 100%); }
+  .art-thumb-salon::after {
+    content:''; position:absolute; inset:auto -60px -60px auto;
+    width: 260px; height: 260px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #E8D9B7, transparent 65%);
+    opacity: .55;
+  }
+  .art-thumb-sonder { background: linear-gradient(135deg, #1E2B2F 0%, #2F4547 50%, #6D8E8A 100%); }
+  .art-thumb-sonder::after {
+    content:''; position:absolute; top: 20px; left: 20px; right: 20px; bottom: 60px;
+    background:
+      repeating-linear-gradient(90deg, transparent 0 40px, color-mix(in oklab, #fff 18%, transparent) 40px 41px),
+      repeating-linear-gradient(0deg, transparent 0 22px, color-mix(in oklab, #fff 10%, transparent) 22px 23px);
+    opacity: .7;
+  }
+  .art-thumb-dog { background: linear-gradient(135deg, #D9B483 0%, #E8CBA7 45%, #F3E3CC 100%); }
+  .art-thumb-dog::after {
+    content: '🦴'; position: absolute; top: 32%; right: -6px;
+    font-size: 160px; opacity: .3; transform: rotate(8deg);
+  }
+
+  .tile.is-article .info { flex-direction: column; align-items: stretch; gap: 10px; padding: 18px; }
+  .tile.is-article .art-kicker {
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: .14em;
+    color: var(--accent); text-transform: uppercase;
+  }
+  .tile.is-article h4.art-title {
+    font-family: var(--f-display); font-size: 24px; line-height: 1.1;
+    font-weight: 400; margin: 0; letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .tile.is-article .art-dek {
+    font-family: var(--f-body); font-size: 13px; line-height: 1.5;
+    color: var(--ink-2); margin: 0;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .tile.is-article .art-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em;
+    color: var(--muted); text-transform: uppercase;
+    border-top: 1px solid var(--line); padding-top: 10px; margin-top: 4px;
+  }
+  .tile.is-article .art-tags { display: flex; gap: 6px; }
+  .tile.is-article .art-tag {
+    padding: 3px 7px; border: 1px solid var(--line); border-radius: 3px;
+    font-size: 9px;
+  }
+
+  /* Wider copy cards inside carousel */
+  .carousel .carousel-track .tile.is-article { width: 380px; }
+  .carousel .carousel-track .tile.is-article.s-md { width: 440px; }
+  .carousel .carousel-track .tile.is-article.s-sq { width: 360px; }
+
+  /* ---------- Article lightbox layout ---------- */
+  .lightbox.lb-article .frame { grid-template-columns: 1fr; max-width: 860px; max-height: 92vh; overflow-y: auto; }
+  .lb-article .lb-media { min-height: 340px; aspect-ratio: 16/9; }
+  .lb-article .lb-body { padding: 44px 56px 56px; gap: 14px; }
+  .lb-article .lb-kicker {
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: .16em;
+    color: var(--accent); text-transform: uppercase;
+  }
+  .lb-article h3.lb-art-title {
+    font-family: var(--f-display); font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.05; letter-spacing: -0.015em; margin: 0; font-weight: 400;
+    text-wrap: balance;
+  }
+  .lb-art-dek {
+    font-family: var(--f-display); font-weight: 400; font-style: italic;
+    font-size: 20px; line-height: 1.35; color: var(--ink-2); margin: 4px 0 0;
+  }
+  .lb-art-byline {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em;
+    color: var(--muted); text-transform: uppercase;
+    padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    margin: 8px 0 6px;
+  }
+  .lb-art-byline b { font-weight: 500; color: var(--ink); }
+  .lb-art-body p { font-family: var(--f-body); font-size: 16px; line-height: 1.65; color: var(--ink); margin: 0 0 14px; }
+  .lb-art-body p q { font-style: italic; }
+  .lb-art-body h4 {
+    font-family: var(--f-display); font-size: 22px; font-weight: 400;
+    letter-spacing: -0.01em; margin: 22px 0 8px;
+  }
+  .lb-art-body ul { margin: 0 0 14px; padding-left: 20px; }
+  .lb-art-body ul li { font-family: var(--f-body); font-size: 15px; line-height: 1.6; margin-bottom: 6px; color: var(--ink); }
+  .lb-art-pull {
+    font-family: var(--f-display); font-size: 24px; line-height: 1.3;
+    font-style: italic; font-weight: 400;
+    border-left: 3px solid var(--accent);
+    padding: 8px 0 8px 22px; margin: 18px 0;
+    color: var(--ink); text-wrap: pretty;
+  }
+  .lb-art-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .lb-art-tags span {
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted);
+    padding: 5px 9px; border: 1px solid var(--line); border-radius: 3px;
+  }
+
+  @media (max-width: 720px) {
+    .lb-article .lb-body { padding: 30px 24px 40px; }
+    .lb-article .lb-media { min-height: 220px; }
+  }
+
+  .ph-graphic { background: var(--accent); color: var(--accent-ink); overflow: hidden; position: relative; }
+  .ph-graphic .big {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--f-display); font-weight: 400;
+    font-size: clamp(48px, 7vw, 120px);
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+    text-align: center;
+    padding: 20px;
+  }
+  .ph-graphic.alt { background: var(--ink); color: var(--bg); }
+  .ph-graphic.alt2 {
+    background: var(--bg-2); color: var(--ink);
+  }
+  .ph-graphic .badge {
+    position: absolute; bottom: 16px; right: 16px;
+    width: 70px; height: 70px; border-radius: 50%;
+    background: var(--card); color: var(--ink);
+    display: grid; place-items: center;
+    font-family: var(--f-mono); font-size: 10px;
+    letter-spacing: .08em; text-align: center; line-height: 1.1;
+    transform: rotate(-8deg);
+  }
+
+  .ph-photo {
+    background:
+      radial-gradient(120% 80% at 20% 20%, color-mix(in oklab, var(--accent) 30%, var(--bg-2)), var(--bg-2) 60%),
+      var(--bg-2);
+    position: relative; overflow: hidden;
+  }
+  .ph-photo::after {
+    content: '';
+    position: absolute; left: 12%; top: 25%; width: 60%; height: 60%;
+    border-radius: 50% 50% 50% 52% / 52% 55% 45% 48%;
+    background: color-mix(in oklab, var(--ink) 22%, transparent);
+    filter: blur(2px);
+  }
+  .ph-photo.product2::after {
+    left: 20%; top: 35%; width: 55%; height: 45%;
+    border-radius: 8px;
+    transform: rotate(-4deg);
+    background: color-mix(in oklab, var(--ink) 28%, transparent);
+  }
+  .ph-photo.product3::after {
+    left: 15%; top: 20%; width: 40%; height: 65%;
+    border-radius: 28% 28% 20% 20%;
+    background: color-mix(in oklab, var(--ink) 30%, transparent);
+  }
+  .ph-photo.product4::after {
+    left: 28%; top: 30%; width: 44%; height: 44%;
+    border-radius: 50%;
+    background: color-mix(in oklab, var(--ink) 25%, transparent);
+  }
+
+  /* ---------- Lightbox ---------- */
+  .lightbox {
+    position: fixed; inset: 0;
+    background: color-mix(in oklab, var(--ink) 85%, transparent);
+    backdrop-filter: blur(14px);
+    display: none;
+    align-items: center; justify-content: center;
+    padding: 32px;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity .25s ease;
+  }
+  .lightbox.open { display: flex; opacity: 1; }
+  .lightbox .frame {
+    background: var(--card);
+    border-radius: var(--r-lg);
+    max-width: 1100px; width: 100%;
+    max-height: 90vh;
+    overflow: hidden;
+    display: grid; grid-template-columns: 1.4fr 1fr;
+    transform: scale(.96);
+    transition: transform .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .lightbox.open .frame { transform: scale(1); }
+  .lightbox .lb-media { position: relative; min-height: 420px; background: var(--bg-2); }
+  .lightbox .lb-body { padding: 34px 36px; display: flex; flex-direction: column; gap: 18px; color: var(--ink); overflow-y: auto; }
+  .lightbox .lb-body .eyebrow::before { background: var(--muted); }
+  .lightbox h3 {
+    font-family: var(--f-display);
+    font-size: 42px; line-height: 1; letter-spacing: -0.01em;
+    margin: 0; font-weight: 400;
+  }
+  .lightbox .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    border-top: 1px solid var(--line); padding-top: 16px;
+  }
+  .lightbox .meta-grid div { display: flex; flex-direction: column; gap: 4px; }
+  .lightbox .meta-grid strong { font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .lightbox .meta-grid span { font-size: 14px; }
+  .lightbox p { margin: 0; color: var(--ink-2); line-height: 1.55; font-size: 15px; }
+  .lightbox .lb-close {
+    position: absolute; top: 18px; right: 18px;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--card); border: 1px solid var(--line);
+    display: grid; place-items: center; cursor: pointer;
+    z-index: 2; color: var(--ink);
+  }
+  .lightbox .lb-close:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .lightbox .lb-nav {
+    position: absolute; bottom: 18px; left: 18px;
+    display: flex; gap: 8px; z-index: 2;
+  }
+  .lightbox .lb-nav button {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--card); border: 1px solid var(--line);
+    cursor: pointer; color: var(--ink);
+    display: grid; place-items: center;
+  }
+  .lightbox .lb-nav button:hover { background: var(--ink); color: var(--bg); }
+
+  /* ---------- Contact ---------- */
+  .contact {
+    padding: 120px 0 140px;
+    border-top: 1px solid var(--line);
+    margin-top: 60px;
+  }
+  .contact-grid {
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: 60px;
+    align-items: end;
+  }
+  .contact h2 {
+    font-family: var(--f-display);
+    font-size: clamp(60px, 9vw, 160px);
+    line-height: 0.9; letter-spacing: -0.03em;
+    margin: 0; font-weight: 400;
+  }
+  .contact h2 em { font-style: italic; color: var(--accent); }
+  .contact-right { display: flex; flex-direction: column; gap: 20px; padding-bottom: 20px; }
+  .contact-link {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--line);
+    padding: 18px 0;
+    font-size: 18px;
+    transition: color .2s;
+    cursor: pointer;
+  }
+  .contact-link:last-child { border-bottom: 1px solid var(--line); }
+  .contact-link:hover { color: var(--accent); }
+  .contact-link .label { font-family: var(--f-mono); font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+  .contact-link .val { font-family: var(--f-display); font-size: 22px; }
+
+  footer {
+    padding: 24px 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--line);
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Reveal on scroll */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+  }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- Tweaks panel ---------- */
+  .tweaks-panel {
+    position: fixed; right: 20px; bottom: 20px;
+    z-index: 200;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: 16px;
+    width: 280px;
+    box-shadow: 0 10px 40px -10px color-mix(in oklab, var(--ink) 40%, transparent);
+    font-family: var(--f-body);
+    display: none;
+  }
+  .tweaks-panel.open { display: block; }
+  .tweaks-panel h5 {
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em;
+    text-transform: uppercase; margin: 0 0 14px; color: var(--muted); font-weight: 500;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .tweaks-panel h5 button {
+    background: transparent; border: none; cursor: pointer; color: var(--muted);
+    font-family: var(--f-mono); font-size: 11px;
+  }
+  .tweak-row { margin-bottom: 14px; }
+  .tweak-row label {
+    display: block;
+    font-family: var(--f-mono); font-size: 10px; color: var(--muted);
+    letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .tweak-row .opts { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tweak-row .opts button {
+    font-family: var(--f-mono); font-size: 11px;
+    padding: 6px 10px; border-radius: 6px;
+    border: 1px solid var(--line); background: transparent; color: var(--ink);
+    cursor: pointer;
+  }
+  .tweak-row .opts button[aria-pressed="true"] {
+    background: var(--ink); color: var(--bg); border-color: var(--ink);
+  }
+  .tweak-row .swatches { display: flex; gap: 6px; }
+  .tweak-row .swatch {
+    width: 28px; height: 28px; border-radius: 50%;
+    cursor: pointer; border: 2px solid transparent;
+  }
+  .tweak-row .swatch[aria-pressed="true"] { border-color: var(--ink); }
+
+  @media (max-width: 960px) {
+    .hero.split { grid-template-columns: 1fr; }
+    .hero.editorial { height: auto; min-height: 100svh; padding: 40px 0; }
+    .hero.editorial .ed-hello { grid-template-columns: 1fr; gap: 32px; }
+    .hero.editorial .ed-portrait { max-height: 60vw; }
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    .services { grid-template-columns: repeat(2, 1fr); }
+    .nav-links { display: none; }
+    .tile.s-md, .tile.s-sq { grid-column: span 6; }
+    .tile.s-lg, .tile.s-wide { grid-column: span 12; }
+    .tile.s-tall { grid-column: span 6; }
+    .lightbox .frame { grid-template-columns: 1fr; max-height: 92vh; overflow-y: auto; }
+    .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+    /* carousel scales down tile widths on mobile */
+    .carousel .carousel-track .tile.s-md { width: 280px; }
+    .carousel .carousel-track .tile.s-sq { width: 240px; }
+    .carousel .carousel-track .tile.s-tall { width: 220px; }
+    .carousel .carousel-track .tile.s-lg { width: 380px; }
+    .carousel .carousel-track .tile.s-wide { width: 420px; }
+  }
+</style>
+</head>
+<body data-screen-label="Portfolio">
+
+<nav class="nav" id="nav">
+  <div class="brand">
+    <span class="brand-dot"></span>
+    Martyna Delewska<span style="color:var(--muted); font-style: italic;">&nbsp;—&nbsp;</span><span data-i18n="brand_role" style="font-family:var(--f-mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted);">Content Creator</span>
+  </div>
+  <div class="nav-links">
+    <a href="#about" data-i18n="nav_about">About</a>
+    <a href="#services" data-i18n="nav_services">Services</a>
+    <a href="#work" data-i18n="nav_work">Work</a>
+    <a href="#contact" data-i18n="nav_contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <button class="mode-toggle" id="langToggle" aria-label="Toggle language" title="Language" style="font-family: var(--f-mono); font-weight: 500;">
+      <span id="langLabel">EN / PL</span>
+    </button>
+    <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode" title="Toggle theme">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path id="modeIcon" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      <span id="modeLabel" data-i18n="mode_dark">Dark</span>
+    </button>
+    <a href="#contact" class="cta" data-i18n="cta_work">Let's work together →</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="hero" data-screen-label="Hero">
+  <!-- content injected by JS based on hero variant -->
+</section>
+
+
+<!-- ABOUT -->
+<section id="about" data-screen-label="About">
+  <div class="eyebrow reveal" data-i18n="about_eyebrow">About</div>
+  <h2 class="section-title reveal" data-i18n="about_title" data-i18n-html="1">A content person <em>who sweats</em> the small stuff.</h2>
+
+  <div class="about-grid">
+    <div class="about-copy reveal">
+      <p data-i18n="about_p1" data-i18n-html="1">I'm <em>Martyna</em> — a content creator who writes copy and designs the visuals that carry it. I run a dog-focused Instagram, partner with pet-friendly brands, and craft copy for a beauty salon and a team of Google Ads specialists.</p>
+      <p data-i18n="about_p2">Right now I'm upskilling in creative writing, digital marketing and SEO basics — and looking for a junior role where I can grow with a team and push meaningful campaigns.</p>
+    </div>
+    <div class="about-side reveal">
+      <div class="block">
+        <h4 data-i18n="about_care">What I care about</h4>
+        <ul>
+          <li><span data-i18n="about_care_1">Copy that sounds human</span><span>01</span></li>
+          <li><span data-i18n="about_care_2">Visuals that stop the scroll</span><span>02</span></li>
+          <li><span data-i18n="about_care_3">Briefs that become brands</span><span>03</span></li>
+          <li><span data-i18n="about_care_4">Campaigns that actually ship</span><span>04</span></li>
+        </ul>
+      </div>
+      <div class="block">
+        <h4 data-i18n="about_now">Currently</h4>
+        <ul>
+          <li><span data-i18n="about_now_1">Instagram — Pet content</span><span data-i18n="status_ongoing">Ongoing</span></li>
+          <li><span data-i18n="about_now_2">Beauty salon — Copy</span><span data-i18n="status_ongoing">Ongoing</span></li>
+          <li><span data-i18n="about_now_3">Google Ads — Creative support</span><span data-i18n="status_ongoing">Ongoing</span></li>
+          <li><span data-i18n="about_now_4">Seeking — Junior digital marketing</span><span>2026</span></li>
+        </ul>
+      </div>
+      <div class="block">
+        <h4 data-i18n="about_toolkit">Toolkit</h4>
+        <div class="hero-pills">
+          <span class="pill">Figma</span>
+          <span class="pill">Photoshop</span>
+          <span class="pill">Lightroom</span>
+          <span class="pill">Canva</span>
+          <span class="pill">Google Ads</span>
+          <span class="pill">Meta Business</span>
+          <span class="pill">Notion</span>
+          <span class="pill">Capcut</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" data-screen-label="Services">
+  <div class="eyebrow reveal" data-i18n="services_eyebrow">Services</div>
+  <h2 class="section-title reveal" data-i18n="services_title" data-i18n-html="1">Four things I do <em>really well.</em></h2>
+  <div class="services reveal">
+    <div class="service">
+      <span class="num" data-i18n="svc_1_num">01 / Copywriting</span>
+      <h3 data-i18n="svc_1_h">Words that earn the click.</h3>
+      <p data-i18n="svc_1_p">Landing pages, ad copy, captions, email — written in the brand's voice, tuned for conversion, and never stuffed with adjectives.</p>
+      <div class="tool-row">
+        <span class="tool" data-i18n="svc_1_t1">Ads</span><span class="tool">•</span>
+        <span class="tool" data-i18n="svc_1_t2">Landing pages</span><span class="tool">•</span>
+        <span class="tool" data-i18n="svc_1_t3">Social</span>
+      </div>
+    </div>
+    <div class="service">
+      <span class="num" data-i18n="svc_2_num">02 / Marketing</span>
+      <h3 data-i18n="svc_2_h">Campaigns from brief to launch.</h3>
+      <p data-i18n="svc_2_p">Ad strategy, audience research, test matrices, reporting. I've supported Google Ads specialists and know what creative the algorithm actually rewards.</p>
+      <div class="tool-row">
+        <span class="tool">Google Ads</span><span class="tool">•</span>
+        <span class="tool">Meta</span><span class="tool">•</span>
+        <span class="tool">SEO</span>
+      </div>
+    </div>
+    <div class="service">
+      <span class="num" data-i18n="svc_3_num">03 / Ad Graphics</span>
+      <h3 data-i18n="svc_3_h">Static &amp; motion that scrolls stop.</h3>
+      <p data-i18n="svc_3_p">Meta, Google Display, Pinterest creative — on brand, sized for every placement, with enough versions to run a real A/B test.</p>
+      <div class="tool-row">
+        <span class="tool">Figma</span><span class="tool">•</span>
+        <span class="tool">Photoshop</span><span class="tool">•</span>
+        <span class="tool">Capcut</span>
+      </div>
+    </div>
+    <div class="service">
+      <span class="num" data-i18n="svc_4_num">04 / Product Photography</span>
+      <h3 data-i18n="svc_4_h">Product shots that feel like the brand.</h3>
+      <p data-i18n="svc_4_p">Styled flat lays, lifestyle shots, pet-friendly product imagery — edited to match your grid and ready to drop into ads.</p>
+      <div class="tool-row">
+        <span class="tool">Lightroom</span><span class="tool">•</span>
+        <span class="tool" data-i18n="svc_4_t2">Styling</span><span class="tool">•</span>
+        <span class="tool" data-i18n="svc_4_t3">Editing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" data-screen-label="Selected Work">
+  <div class="work-head">
+    <div>
+      <div class="eyebrow reveal" data-i18n="work_eyebrow">Selected Work</div>
+      <h2 class="section-title reveal" data-i18n="work_title" data-i18n-html="1" style="margin-bottom:0;">Recent things <em>I've made.</em></h2>
+    </div>
+    <div class="filters reveal" id="filters">
+      <button class="filter" data-jump="sec-copy">01 &nbsp;<span data-i18n="work_f_copy">Copy</span> <span class="count" id="c-copy">4</span></button>
+      <button class="filter" data-jump="sec-graphics">02 &nbsp;<span data-i18n="work_f_graphics">Ad Graphics</span> <span class="count" id="c-graphics">4</span></button>
+      <button class="filter" data-jump="sec-photo">03 &nbsp;<span data-i18n="work_f_photo">Photography</span> <span class="count" id="c-photo">4</span></button>
+    </div>
+  </div>
+</section>
+
+<section id="sec-copy" class="work-section" data-screen-label="Copywriting Work">
+  <div class="work-section-head reveal">
+    <div class="wsh-left">
+      <span class="wsh-num">01</span>
+      <div>
+        <h3 class="wsh-title" data-i18n="wsh_copy_title" data-i18n-html="1">Copywriting <em>samples.</em></h3>
+        <p class="wsh-sub" data-i18n="wsh_copy_sub">Landing pages, ad copy, captions, email sequences — written in the brand's voice and tuned for conversion.</p>
+      </div>
+    </div>
+    <div class="wsh-meta">
+      <span data-i18n="wsh_pieces">04 pieces</span>
+      <span>2025 — 2026</span>
+    </div>
+  </div>
+  <div class="carousel reveal" data-carousel="copy" style="margin-top: 24px;">
+    <div class="carousel-viewport">
+      <div class="carousel-track grid" data-grid="copy"></div>
+    </div>
+    <div class="carousel-controls">
+      <div class="carousel-progress"><div class="carousel-progress-bar"></div></div>
+      <div class="carousel-count" data-count><b>01</b> / 04</div>
+      <div class="carousel-arrows">
+        <button class="carousel-arrow" data-dir="-1" aria-label="Previous"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <button class="carousel-arrow" data-dir="1" aria-label="Next"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sec-graphics" class="work-section" data-screen-label="Ad Graphics Work">
+  <div class="work-section-head reveal">
+    <div class="wsh-left">
+      <span class="wsh-num">02</span>
+      <div>
+        <h3 class="wsh-title" data-i18n="wsh_graphics_title" data-i18n-html="1">Ad graphics <em>&amp; campaigns.</em></h3>
+        <p class="wsh-sub" data-i18n="wsh_graphics_sub">Meta, Google Display, Pinterest creative — on-brand, placement-sized, delivered with a proper test matrix.</p>
+      </div>
+    </div>
+    <div class="wsh-meta">
+      <span data-i18n="wsh_pieces">04 pieces</span>
+      <span>2025 — 2026</span>
+    </div>
+  </div>
+  <div class="carousel reveal" data-carousel="graphics" style="margin-top: 24px;">
+    <div class="carousel-viewport">
+      <div class="carousel-track grid" data-grid="graphics"></div>
+    </div>
+    <div class="carousel-controls">
+      <div class="carousel-progress"><div class="carousel-progress-bar"></div></div>
+      <div class="carousel-count" data-count><b>01</b> / 04</div>
+      <div class="carousel-arrows">
+        <button class="carousel-arrow" data-dir="-1" aria-label="Previous"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <button class="carousel-arrow" data-dir="1" aria-label="Next"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sec-photo" class="work-section" data-screen-label="Product Photography Work">
+  <div class="work-section-head reveal">
+    <div class="wsh-left">
+      <span class="wsh-num">03</span>
+      <div>
+        <h3 class="wsh-title" data-i18n="wsh_photo_title" data-i18n-html="1">Product <em>photography.</em></h3>
+        <p class="wsh-sub" data-i18n="wsh_photo_sub">Styled flat-lays, lifestyle shots and minimal still life — edited to match each brand's grid.</p>
+      </div>
+    </div>
+    <div class="wsh-meta">
+      <span data-i18n="wsh_pieces">04 pieces</span>
+      <span>2025 — 2026</span>
+    </div>
+  </div>
+  <div class="carousel reveal" data-carousel="photo" style="margin-top: 24px;">
+    <div class="carousel-viewport">
+      <div class="carousel-track grid" data-grid="photo"></div>
+    </div>
+    <div class="carousel-controls">
+      <div class="carousel-progress"><div class="carousel-progress-bar"></div></div>
+      <div class="carousel-count" data-count><b>01</b> / 04</div>
+      <div class="carousel-arrows">
+        <button class="carousel-arrow" data-dir="-1" aria-label="Previous"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <button class="carousel-arrow" data-dir="1" aria-label="Next"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- CONTACT -->
+<section class="contact" id="contact" data-screen-label="Contact">
+  <div style="max-width:1440px; margin: 0 auto; padding: 0 32px;">
+    <div class="eyebrow reveal" data-i18n="contact_eyebrow">Contact</div>
+    <div class="contact-grid reveal" style="margin-top: 20px;">
+      <h2 data-i18n="contact_title" data-i18n-html="1">Have a brief? <em>Let's talk.</em></h2>
+      <div class="contact-right">
+        <a href="mailto:martdelewska@gmail.com" class="contact-link">
+          <span class="label" data-i18n="contact_email">Email</span>
+          <span class="val">martdelewska@gmail.com →</span>
+        </a>
+        <a href="https://www.instagram.com/" class="contact-link">
+          <span class="label">Instagram</span>
+          <span class="val">@martynadelewska →</span>
+        </a>
+        <a href="https://www.linkedin.com/in/martyna-delewska" target="_blank" class="contact-link">
+          <span class="label">LinkedIn</span>
+          <span class="val">in/martyna-delewska →</span>
+        </a>
+        <a href="#" class="contact-link">
+          <span class="label" data-i18n="contact_loc">Location</span>
+          <span class="val" data-i18n="contact_loc_val">Katowice, Poland · Remote</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Martyna Delewska</span>
+  <span data-i18n="footer_built">Designed &amp; built with care</span>
+  <span data-i18n="footer_updated">Last updated — Apr 2026</span>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <div class="frame">
+    <div class="lb-media" id="lbMedia"></div>
+    <div class="lb-body" id="lbBody"></div>
+    <button class="lb-close" id="lbClose" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="lb-nav">
+      <button id="lbPrev" aria-label="Previous"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button id="lbNext" aria-label="Next"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- TWEAKS PANEL -->
+<div class="tweaks-panel" id="tweaksPanel">
+  <h5>
+    <span>Tweaks</span>
+    <button id="tweaksClose">✕</button>
+  </h5>
+  <div class="tweak-row">
+    <label>Theme preset</label>
+    <div class="opts" data-group="theme">
+      <button data-value="editorial">Editorial</button>
+      <button data-value="swiss">Swiss</button>
+      <button data-value="warm">Warm</button>
+      <button data-value="forest">Forest</button>
+    </div>
+  </div>
+  <div class="tweak-row">
+    <label>Accent</label>
+    <div class="swatches" data-group="accent">
+      <div class="swatch" data-value="#FF5B2E" style="background:#FF5B2E"></div>
+      <div class="swatch" data-value="#1E4DFF" style="background:#1E4DFF"></div>
+      <div class="swatch" data-value="#16A34A" style="background:#16A34A"></div>
+      <div class="swatch" data-value="#D946EF" style="background:#D946EF"></div>
+      <div class="swatch" data-value="#E11D48" style="background:#E11D48"></div>
+      <div class="swatch" data-value="#F59E0B" style="background:#F59E0B"></div>
+    </div>
+  </div>
+  <div class="tweak-row">
+    <label>Font pairing</label>
+    <div class="opts" data-group="fontPair">
+      <button data-value="serif-grotesk">Serif + Geist</button>
+      <button data-value="grotesk-mono">Space Grotesk</button>
+      <button data-value="newsreader-dm">Newsreader + DM</button>
+      <button data-value="bricolage">Bricolage</button>
+    </div>
+  </div>
+  <div class="tweak-row">
+    <label>Hero variant</label>
+    <div class="opts" data-group="hero">
+      <button data-value="split">Split</button>
+      <button data-value="centered">Centered</button>
+      <button data-value="editorial">Editorial</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ----------- Data ----------- */
+const WORK = [
+  // Copy
+  { id:'c1', cat:'copy', size:'s-md', title:'Built for zoomies. Ready for naps.', client:'Ruff & Ready', year:'Mar 2026', role:'Copywriter',
+    kicker:'Product launch · Pet',
+    dek:'How we wrote the launch copy for a small pet accessories brand — from hero lines to email sequence — without sounding like every other “premium” treat box on the shelf.',
+    readtime:'4 min read', publication:'Ruff & Ready Journal',
+    thumbClass:'art-thumb-ruff',
+    tags:['Copy', 'Launch', 'Pet brand'],
+    body:[
+      {type:'p', text:"When <em>Ruff & Ready</em> asked me to write the launch copy for their first accessories drop, they handed me a brand voice doc that read like every other indie pet brand on Instagram: <q>premium</q>, <q>thoughtfully made</q>, <q>for modern dogs.</q> The kind of copy that doesn't lose you a sale — but doesn't earn you one either."},
+      {type:'p', text:"So we started over. I asked the founder to describe her own dog in three honest words. The answer: <strong>chaotic, cuddly, snack-motivated.</strong> That became the voice."},
+      {type:'pull', text:'Stop writing for “the modern dog owner.” Write for the person whose dog just stole a sock.'},
+      {type:'p', text:"The hero headline — <em>“Built for zoomies. Ready for naps.”</em> — is doing two jobs. It names the two states every dog owner knows, and it quietly tells you the gear is made for both the wild and the soft parts of the day."},
+      {type:'h', text:'What we shipped'},
+      {type:'list', items:['Hero section copy + 4 supporting sections','Product cards for 6 SKUs (harness, leash, 2 treat pouches, 2 bandanas)','5-email launch sequence (teaser → drop → restock)','3 Meta ad variants with different emotional hooks']},
+      {type:'p', text:'The drop sold through the first run in nine days. The email sequence kept a 54% open rate through the fifth send, which for a new brand is not the worst place to start.'}
+    ] },
+  { id:'c2', cat:'copy', size:'s-sq', title:'Glow like you mean it.', client:'Strefa Piękna', year:'Nov 2025', role:'Copy & voice',
+    kicker:'Brand voice · Beauty',
+    dek:'A small Katowice salon had a beautiful interior and copy that sounded like it was written by a legal department. We rewrote the whole thing in one weekend — and one pot of coffee.',
+    readtime:'3 min read', publication:'The Copy Desk',
+    thumbClass:'art-thumb-salon',
+    tags:['Voice', 'Rewrite', 'Beauty'],
+    body:[
+      {type:'p', text:"Strefa Piękna's website was a gorgeous photo set wrapped around one of the most generic service menus I've ever read. “We offer a range of professional treatments in a relaxing atmosphere.” Every salon in the city offers that. It tells me nothing."},
+      {type:'p', text:"I spent two afternoons in the salon before writing a single line. Watched the receptionist talk to returning clients. Listened to what the beautician actually says when she's explaining a treatment. That's the voice the site was missing."},
+      {type:'pull', text:'The brand was already there — in how the staff spoke. The website just hadn’t caught up.'},
+      {type:'h', text:'The rewrite'},
+      {type:'p', text:"Every service description got two sentences: one that names the problem in human language, one that names the outcome without promising the moon. The home page lost four paragraphs and gained a better hook. The Google Business description got rewritten three times before we landed one that didn't sound like a LinkedIn bio."},
+      {type:'list', items:['Home page + about page','Service menu (14 treatments)','Google Business description','3 standing IG caption templates']},
+      {type:'p', text:"Within six weeks, the Google Business profile had 40% more saves and the “Contact” clicks roughly doubled. The words weren't magic. They just sounded like the salon."}
+    ] },
+  { id:'c3', cat:'copy', size:'s-md', title:'Less fluff. More click.', client:'Sonder Services', year:'2025–2026', role:'SEO Copywriter',
+    kicker:'SEO · Longform',
+    dek:'Twelve months of SEO articles for a services agency. What actually moved the ranking needle, and the five article templates I now reuse for every client.',
+    readtime:'6 min read', publication:'Search & Sense',
+    thumbClass:'art-thumb-sonder',
+    tags:['SEO', 'Longform', 'Content system'],
+    body:[
+      {type:'p', text:"Sonder Services came to me with a blog that was publishing, but not ranking. Twenty articles a year, most of them landing in the same quiet corner of page four. The content was fine. The problem was it answered questions nobody was asking in that exact shape."},
+      {type:'h', text:'The audit'},
+      {type:'p', text:"First month was all research. I mapped every existing post against actual search queries, pulled a 90-day trend on each topic, and marked 14 posts as “cannibalising each other.” Half the backlog got merged or retired."},
+      {type:'pull', text:'Most SEO problems are editorial problems wearing a technical costume.'},
+      {type:'h', text:'The five templates'},
+      {type:'list', items:['“Vs.” comparison (high intent, mid funnel)','“How to” with a real checklist, not filler','Case-study longform (pull quotes + numbers)','Glossary-style definitional post','Opinion piece tied to a recent industry moment']},
+      {type:'p', text:"Over twelve months we published 34 articles and retired 11 old ones. Organic sessions to the blog roughly tripled, and three articles started ranking in position 1–3 for terms the sales team actually cares about. The templates now live as a Notion page every new writer gets on day one."}
+    ] },
+  { id:'c4', cat:'copy', size:'s-sq', title:"Today's mood: biscuit.", client:'Dog Instagram (personal project)', year:'2021–present', role:'Content Creator',
+    kicker:'Social · Captions',
+    dek:"How I grew a dog Instagram to 6,000 followers with no ads, no growth hacks, and a caption library I actually want to read.",
+    readtime:'5 min read', publication:'Field Notes',
+    thumbClass:'art-thumb-dog',
+    tags:['Social', 'Voice', 'Community'],
+    body:[
+      {type:'p', text:"I started the Instagram for my dog in 2021 because I was bored during lockdown. Five years later it's 6,000 followers and the closest thing I have to a copy portfolio. Brands find me there before LinkedIn does."},
+      {type:'p', text:"The whole thing runs on three pillars and a caption library. That's it. No posting schedule tool, no Reels trend chasing, no hashtag spreadsheet."},
+      {type:'pull', text:'A dog Instagram is a copywriting job. The photo is the headline. The caption is why anyone cares.'},
+      {type:'h', text:'The three pillars'},
+      {type:'list', items:['<strong>Mood posts.</strong> Close-ups with a one-liner. 60% of the feed.','<strong>Narrative posts.</strong> A short story in 3–4 sentences. 30%.','<strong>Service posts.</strong> A practical tip other dog owners can steal. 10%.']},
+      {type:'h', text:'The caption library'},
+      {type:'p', text:"I keep a running doc of 300+ caption starters, organised by mood. When I post I don't write from scratch — I pick a starter, adjust the last line to the photo, and go. It turns a 20-minute writing task into a 3-minute one, which is the only reason I've kept this going for five years."}
+    ] },
+
+  // Graphics
+  { id:'g1', cat:'graphics', size:'s-lg', title:'Spring Sale — Meta set', client:'Pet brand partner', year:'2026', role:'Art direction, design',
+    big:'SPRING SALE', badgeText:'UP TO 40% OFF',
+    summary:"Meta creative set — 4 static + 2 motion, sized for feed, stories and reels. Delivered in 48h with a clear A/B variant matrix." },
+  { id:'g2', cat:'graphics', size:'s-md', title:'Brow Bar — promo carousel', client:'Beauty salon', year:'2025', role:'Design',
+    big:'BROW BAR', alt:true, badgeText:'NEW · BOOK NOW',
+    summary:"10-slide carousel announcing a new service line. Art direction, type system, photo selection and final retouching." },
+  { id:'g3', cat:'graphics', size:'s-sq', title:'Treat drop — poster', client:'Pet brand partner', year:'2026', role:'Poster design',
+    big:'TREAT\nDROP', alt2:true, badgeText:'FRIDAY\n6 PM',
+    summary:"Single-shot poster used in-store and as a Story takeover. Built around one hero word and a strong color block." },
+  { id:'g4', cat:'graphics', size:'s-md', title:'AdWise — social content', client:'AdWise Agency', year:'2026', role:'Content Specialist',
+    big:'B2B\nCONTENT', badgeText:'ADWISE\n2026',
+    summary:"Social media graphics and content for AdWise B2B Marketing Agency. Regular posting, branded templates and campaign assets." },
+
+  // Photo
+  { id:'p1', cat:'photo', size:'s-md', title:'Natural dog treats — hero shot', client:'Pet brand partner', year:'2026', role:'Photography, styling',
+    photoClass:'ph-photo',
+    summary:"Product hero for a new treats line. Shot on daylight + softbox, styled with kraft props, edited to match the brand's warm grid." },
+  { id:'p2', cat:'photo', size:'s-sq', title:'Tincture bottles — flat lay', client:'Wellness brand', year:'2025', role:'Flat-lay styling',
+    photoClass:'ph-photo product2',
+    summary:"Three-bottle flat-lay for an e-commerce hero. Consistent lighting across SKUs, retouched to match a cool, clinical look." },
+  { id:'p3', cat:'photo', size:'s-tall', title:'Dog accessories — lifestyle', client:'Pet brand partner', year:'2026', role:'Lifestyle photography',
+    photoClass:'ph-photo product3',
+    summary:"On-model lifestyle shoot with my own dog, Tofu. Thirty usable shots delivered across two sessions, edited in Lightroom." },
+  { id:'p4', cat:'photo', size:'s-md', title:'Strefa Piękna — salon imagery', client:'Strefa Piękna', year:'2025', role:'Photography',
+    photoClass:'ph-photo product4',
+    summary:"Salon photography for social media and Google Business. Treatment shots, atmosphere stills, edited to match the brand palette." },
+];
+
+/* update counts */
+['copy','graphics','photo'].forEach(cat => {
+  const el = document.getElementById('c-' + cat);
+  if (el) el.textContent = WORK.filter(w => w.cat === cat).length;
+});
+document.getElementById('c-all')?.remove();
+
+/* ---------- Grid render ---------- */
+const grids = {
+  copy: document.querySelector('[data-grid="copy"]'),
+  graphics: document.querySelector('[data-grid="graphics"]'),
+  photo: document.querySelector('[data-grid="photo"]'),
+};
+
+function phFor(w) {
+  if (w.cat === 'copy') {
+    const thumb = w.thumbClass || 'art-thumb-ruff';
+    const pub = wi(w,'publication') || '';
+    return `<div class="art-thumb ${thumb}"><span class="pub">${pub}</span></div>`;
+  }
+  if (w.cat === 'graphics') {
+    const cls = w.alt ? 'ph-graphic alt' : w.alt2 ? 'ph-graphic alt2' : 'ph-graphic';
+    const big = (wi(w,'big') || '').replace(/\n/g, '<br>');
+    const badgeSrc = wi(w,'badgeText');
+    const badge = badgeSrc ? `<div class="badge">${badgeSrc.replace(/\n/g,'<br>')}</div>` : '';
+    return `<div class="ph ${cls}"><div class="big">${big}</div>${badge}</div>`;
+  }
+  return `<div class="ph ${w.photoClass}"><div class="mono">${wi(w,'title')}</div></div>`;
+}
+
+function catLabel(cat) {
+  if (cat === 'copy') return tr('cat_copy');
+  if (cat === 'graphics') return tr('cat_graphics');
+  return tr('cat_photo');
+}
+
+/* Localized work fields for PL; fall back to English fields on the item */
+const WORK_PL = {
+  c1: { title:'Ruff & Ready — copy launchowe', role:'Copywriterka', quote:'Stworzone do zoomies. Gotowe do drzemki.', summary:'Copy kampanii launchowej dla marki akcesoriów dla zwierząt. Hasła hero, karty produktów, sekwencja maili i trzy warianty reklam Meta.',
+    kicker:'Launch produktu · Pet', readtime:'4 min czytania', publication:'Dziennik Ruff & Ready',
+    dek:'Jak napisałam copy launchowe dla małej marki akcesoriów dla zwierząt — od haseł hero po sekwencję maili — bez brzmienia jak każda inna „premium” marka w Instagramie.',
+    body:[
+      {type:'p', text:"Kiedy <em>Ruff & Ready</em> poprosili mnie o copy launchowe pierwszej kolekcji akcesoriów, dostałam brandbook, który brzmiał jak każda inna niezależna marka petowa na Instagramie: <q>premium</q>, <q>zaprojektowane z troską</q>, <q>dla nowoczesnych psów.</q> Takie copy, które nie traci sprzedaży — ale też jej nie zdobywa."},
+      {type:'p', text:"Zaczęłyśmy od zera. Poprosiłam założycielkę, żeby opisała swojego psa w trzech szczerych słowach. Odpowiedź: <strong>chaotyczny, przytulaśny, motywowany przekąską.</strong> To został głos."},
+      {type:'pull', text:'Przestań pisać do „nowoczesnej właścicielki psa”. Pisz do kogoś, komu pies właśnie ukradł skarpetkę.'},
+      {type:'p', text:"Nagłówek hero — <em>„Stworzone do zoomies. Gotowe do drzemki.”</em> — robi dwie rzeczy. Nazywa dwa stany, które zna każdy właściciel psa, i cicho mówi, że produkty są zrobione zarówno na dziką, jak i miękką część dnia."},
+      {type:'h', text:'Co dostarczyłam'},
+      {type:'list', items:['Copy sekcji hero + 4 sekcje wspierające','Karty produktów dla 6 SKU (szelki, smycz, 2 saszetki na przekąski, 2 bandany)','Sekwencja 5 maili launchowych (zapowiedź → premiera → restock)','3 warianty reklam Meta z różnymi hakami emocjonalnymi']},
+      {type:'p', text:'Pierwsza partia sprzedała się w dziewięć dni. Sekwencja mailowa utrzymała 54% open rate do piątej wysyłki — dla nowej marki to nie najgorszy punkt startu.'}
+    ] },
+  c2: { title:'Strefa Piękna — przepisanie głosu marki', role:'Copy i voice', quote:'Błyszcz z charakterem.', summary:"Przepisałam stronę salonu, opis Google Business i menu usług. Zamieniłam zupę przymiotników na ciepły, pewny głos dopasowany do doświadczenia w salonie.",
+    kicker:'Głos marki · Beauty', readtime:'3 min czytania', publication:'Biurko copy',
+    dek:'Mały salon w Katowicach miał piękne wnętrze i copy, które brzmiało jakby napisał je dział prawny. Przepisałam całość w jeden weekend — i jeden dzbanek kawy.',
+    body:[
+      {type:'p', text:"Strona Strefy Piękna była świetną sesją zdjęciową owiniętą wokół jednego z najbardziej generycznych menu usług, jakie czytałam. „Oferujemy szereg profesjonalnych zabiegów w relaksującej atmosferze.” Każdy salon w mieście to oferuje. Nic mi to nie mówi."},
+      {type:'p', text:"Spędziłam dwa popołudnia w salonie, zanim napisałam pierwsze zdanie. Słuchałam, jak recepcjonistka rozmawia ze stałymi klientkami. Jak kosmetyczka tłumaczy zabieg. Tego głosu brakowało stronie."},
+      {type:'pull', text:'Marka już tam była — w tym, jak mówi personel. Strona tylko nie nadążała.'},
+      {type:'h', text:'Przepisanie'},
+      {type:'p', text:"Każdy opis usługi dostał dwa zdania: jedno nazywające problem ludzkim językiem, drugie nazywające efekt bez obiecywania gwiazdki z nieba. Strona główna straciła cztery akapity i zyskała lepszy hak. Opis Google Business pisałyśmy trzy razy, zanim trafiłyśmy wersję, która nie brzmi jak bio LinkedIn."},
+      {type:'list', items:['Strona główna + strona „O nas”','Menu usług (14 zabiegów)','Opis Google Business','3 szablony podpisów IG do stałego użytku']},
+      {type:'p', text:"W sześć tygodni profil Google Business miał 40% więcej zapisów, a kliknięcia „Kontakt” mniej więcej się podwoiły. Słowa nie były magiczne. Po prostu brzmiały jak salon."}
+    ] },
+  c3: { title:'Sonder Services — artykuły SEO', role:'Copywriterka SEO', quote:'Mniej waty. Więcej klików.', summary:'Stałe copywriting SEO: artykuły blogowe, landing pages i opisy produktów zoptymalizowane pod intencje wyszukiwania i konwersję.',
+    kicker:'SEO · Longform', readtime:'6 min czytania', publication:'Szukaj i Sens',
+    dek:'Dwanaście miesięcy artykułów SEO dla agencji usługowej. Co naprawdę ruszyło rankingami i pięć szablonów, których używam teraz przy każdym kliencie.',
+    body:[
+      {type:'p', text:"Sonder Services przyszli do mnie z blogiem, który publikował, ale się nie rankował. Dwadzieścia artykułów rocznie, większość lądowała w tym samym cichym rogu strony czwartej. Treść była ok. Problem w tym, że odpowiadała na pytania, których nikt nie zadawał w takiej formie."},
+      {type:'h', text:'Audyt'},
+      {type:'p', text:"Pierwszy miesiąc to same researche. Zmapowałam każdy istniejący post względem realnych zapytań, wyciągnęłam 90-dniowy trend dla każdego tematu i oznaczyłam 14 postów jako „kanibalizujące się nawzajem”. Połowa archiwum została scalona albo wycofana."},
+      {type:'pull', text:'Większość problemów SEO to problemy redakcyjne w technicznym kostiumie.'},
+      {type:'h', text:'Pięć szablonów'},
+      {type:'list', items:['„Vs.” porównanie (wysoka intencja, środek lejka)','„Jak zrobić” z prawdziwą listą kontrolną, nie wypełniaczem','Case study longform (pull quote'+'\u2019y + liczby)','Post definicyjny w stylu słownika','Tekst opiniotwórczy podpięty pod świeży moment branżowy']},
+      {type:'p', text:"Przez dwanaście miesięcy opublikowaliśmy 34 artykuły i wycofali 11 starych. Ruch organiczny na blogu mniej więcej potroił się, a trzy artykuły zaczęły rankować na pozycjach 1–3 dla fraz, na których zależy zespołowi sprzedaży. Szablony żyją teraz jako strona w Notion, którą dostaje każdy nowy copywriter pierwszego dnia."}
+    ] },
+  c4: { title:'Dog IG — biblioteka podpisów', role:'Twórczyni treści', quote:"Nastrój dnia: ciastko.", summary:'Instagram psa z 6 000 obserwującymi. 300+ podpisów, trzy powtarzalne filary treści, spójna kadencja publikacji. Osiągnięte organicznie.',
+    kicker:'Social · Podpisy', readtime:'5 min czytania', publication:'Notatki z terenu',
+    dek:'Jak wyhodowałam Instagram psa do 6 000 obserwujących bez reklam, bez growth hacków i z biblioteką podpisów, którą chce mi się czytać.',
+    body:[
+      {type:'p', text:"Założyłam Instagram dla psa w 2021 roku, bo się nudziłam podczas lockdownu. Pięć lat później to 6 000 obserwujących i najbliższa rzecz, jaką mam do portfolio copy. Marki znajdują mnie tam, zanim znajdą mnie na LinkedIn."},
+      {type:'p', text:"Całość działa na trzech filarach i bibliotece podpisów. Tyle. Bez narzędzia do planowania postów, bez gonienia trendów Reels, bez arkusza hashtagów."},
+      {type:'pull', text:'Instagram psa to praca copy. Zdjęcie to nagłówek. Podpis to powód, dla którego komuś zależy.'},
+      {type:'h', text:'Trzy filary'},
+      {type:'list', items:['<strong>Nastrój.</strong> Zbliżenie + jedno zdanie. 60% feedu.','<strong>Narracja.</strong> Krótka historia w 3–4 zdaniach. 30%.','<strong>Usługa.</strong> Praktyczna rada, którą inna właścicielka psa może ukraść. 10%.']},
+      {type:'h', text:'Biblioteka podpisów'},
+      {type:'p', text:"Prowadzę dokument z 300+ otwarciami podpisów, uporządkowanymi według nastroju. Jak publikuję, nie piszę od zera — wybieram otwarcie, dopasowuję ostatnią linijkę do zdjęcia i idę dalej. To zamienia 20-minutowe pisanie w 3-minutowe, co jest jedynym powodem, dla którego ciągnę to pięć lat."}
+    ] },
+
+  g1: { title:'Wiosenna wyprzedaż — zestaw Meta', role:'Kierunek artystyczny, projekt', big:'WIOSENNA\nWYPRZEDAŻ', badgeText:'DO 40% TANIEJ', summary:'Zestaw kreacji na Meta — 4 statyczne + 2 motion, rozmiary pod feed, stories i reels. Dostarczone w 48h z czytelną matrycą wariantów A/B.' },
+  g2: { title:'Strefa Piękna — karuzela promocyjna', role:'Projekt', big:'BROW BAR', badgeText:'NOWOŚĆ · REZERWUJ', summary:'10-slajdowa karuzela ogłaszająca nową linię usług. Kierunek artystyczny, system typograficzny, selekcja zdjęć i finalny retusz.' },
+  g3: { title:'Drop przekąsek — plakat', role:'Projekt plakatu', big:'DROP\nSMAKÓW', badgeText:'PIĄTEK\n18:00', summary:'Pojedynczy plakat użyty in-store i jako przejęcie Stories. Zbudowany wokół jednego słowa hero i mocnego bloku koloru.' },
+  g4: { title:'AdWise — content social media', role:'Content Specialist', big:'B2B\nCONTENT', badgeText:'ADWISE\n2026', summary:'Grafiki i treści social media dla AdWise Agencja Marketingu B2B. Regularne publikacje, szablony marki i materiały kampanijne.' },
+
+  p1: { title:'Naturalne przekąski dla psów — ujęcie hero', role:'Fotografia, stylizacja', summary:"Ujęcie produktowe hero dla nowej linii przekąsek. Naturalne światło + softbox, stylizacja z rekwizytami z kraftu, edycja pod ciepłą siatkę marki." },
+  p2: { title:'Nalewki — flat lay', role:'Stylizacja flat lay', summary:'Trzy-butelkowy flat lay na hero e-commerce. Spójne światło między SKU, retusz pod chłodny, kliniczny look.' },
+  p3: { title:'Akcesoria dla psów — lifestyle', role:'Fotografia lifestyle', summary:'Sesja lifestyle z moim psem Tofu. Trzydzieści użytecznych ujęć w dwóch sesjach, edycja w Lightroomie.' },
+  p4: { title:'Strefa Piękna — zdjęcia salonu', role:'Fotografia', summary:"Fotografia salonu na social media i Google Business. Ujęcia zabiegów, klimat salonu, edycja pod paletę marki." },
+};
+
+function wi(w, field) {
+  if (TWEAKS.lang === 'pl' && WORK_PL[w.id] && WORK_PL[w.id][field] !== undefined) return WORK_PL[w.id][field];
+  return w[field];
+}
+
+function tileHTML(w, i) {
+  if (w.cat === 'copy') {
+    const tags = (w.tags || []).slice(0, 2).map(t => `<span class="art-tag">${t}</span>`).join('');
+    return `
+      <article class="tile is-article ${w.size} reveal" data-cat="${w.cat}" data-idx="${i}">
+        <div class="media">
+          ${phFor(w)}
+        </div>
+        <div class="info">
+          <div class="art-kicker">${wi(w,'kicker') || catLabel(w.cat)}</div>
+          <h4 class="art-title">${wi(w,'title')}</h4>
+          <p class="art-dek">${wi(w,'dek') || wi(w,'summary')}</p>
+          <div class="art-foot">
+            <div class="art-tags">${tags}</div>
+            <span>${wi(w,'readtime') || wi(w,'year')}</span>
+          </div>
+        </div>
+      </article>
+    `;
+  }
+  return `
+    <article class="tile ${w.size} reveal" data-cat="${w.cat}" data-idx="${i}">
+      <div class="media">
+        <span class="tag">${catLabel(w.cat)}</span>
+        ${phFor(w)}
+        <div class="hover-overlay">
+          <div class="ho-in">
+            <div class="meta">${wi(w,'client')} · ${wi(w,'year')}</div>
+            <div class="ttl">${wi(w,'title')}</div>
+          </div>
+        </div>
+      </div>
+      <div class="info">
+        <div>
+          <h4>${wi(w,'title')}</h4>
+          <p>${wi(w,'client')} · ${wi(w,'year')}</p>
+        </div>
+        <div class="plus">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderGrid() {
+  ['copy', 'graphics', 'photo'].forEach(cat => {
+    const items = WORK.map((w, i) => ({ w, i })).filter(({ w }) => w.cat === cat);
+    grids[cat].innerHTML = items.map(({ w, i }) => tileHTML(w, i)).join('');
+    grids[cat].querySelectorAll('.tile').forEach(t => {
+      t.addEventListener('click', () => openLightbox(parseInt(t.dataset.idx, 10)));
+    });
+    grids[cat].querySelectorAll('.reveal').forEach(el => io.observe(el));
+  });
+  initCarousels();
+}
+
+/* ---------- Carousel logic ---------- */
+function initCarousels() {
+  document.querySelectorAll('.carousel').forEach(car => {
+    const viewport = car.querySelector('.carousel-viewport');
+    const track = car.querySelector('.carousel-track');
+    const progressBar = car.querySelector('.carousel-progress-bar');
+    const countEl = car.querySelector('[data-count]');
+    const prev = car.querySelector('[data-dir="-1"]');
+    const next = car.querySelector('[data-dir="1"]');
+    if (!viewport || !track) return;
+
+    const tiles = Array.from(track.querySelectorAll('.tile'));
+    const total = tiles.length;
+
+    function update() {
+      const sl = viewport.scrollLeft;
+      const maxScroll = Math.max(0, track.scrollWidth - viewport.clientWidth);
+      const canPrev = sl > 4;
+      const canNext = sl < maxScroll - 4;
+      car.dataset.canPrev = canPrev ? '1' : '0';
+      car.dataset.canNext = canNext ? '1' : '0';
+      if (prev) prev.disabled = !canPrev;
+      if (next) next.disabled = !canNext;
+
+      // hide controls entirely if everything fits
+      const fits = track.scrollWidth <= viewport.clientWidth + 2;
+      car.classList.toggle('fits', fits);
+
+      // progress
+      const pct = maxScroll > 0 ? sl / maxScroll : 0;
+      if (progressBar) {
+        const barW = Math.max(0.1, viewport.clientWidth / Math.max(track.scrollWidth, 1));
+        progressBar.style.width = (barW * 100) + '%';
+        progressBar.style.transform = `translateX(${pct * ((1 / barW) - 1) * 100}%)`;
+      }
+
+      // current-item count: pick tile whose left edge is nearest the viewport's left
+      if (countEl && tiles.length) {
+        const vpLeft = viewport.getBoundingClientRect().left;
+        let activeIdx = 0;
+        let bestDist = Infinity;
+        tiles.forEach((t, i) => {
+          const d = Math.abs(t.getBoundingClientRect().left - vpLeft);
+          if (d < bestDist) { bestDist = d; activeIdx = i; }
+        });
+        const pad = (n) => String(n).padStart(2, '0');
+        countEl.innerHTML = `<b>${pad(activeIdx + 1)}</b> / ${pad(total)}`;
+      }
+    }
+
+    function scrollByTile(dir) {
+      const vpLeft = viewport.getBoundingClientRect().left;
+      // find the tile at or just past the left edge; move `dir` tiles from there
+      let current = 0;
+      let bestDist = Infinity;
+      tiles.forEach((t, i) => {
+        const d = Math.abs(t.getBoundingClientRect().left - vpLeft);
+        if (d < bestDist) { bestDist = d; current = i; }
+      });
+      const target = Math.max(0, Math.min(tiles.length - 1, current + dir));
+      const targetTile = tiles[target];
+      if (!targetTile) return;
+      const scrollTo = targetTile.offsetLeft - track.offsetLeft;
+      viewport.scrollTo({ left: scrollTo, behavior: 'smooth' });
+    }
+
+    if (prev) prev.addEventListener('click', () => scrollByTile(-1));
+    if (next) next.addEventListener('click', () => scrollByTile(1));
+    viewport.addEventListener('scroll', update, { passive: true });
+
+    // drag-to-scroll (mouse)
+    let isDown = false, startX = 0, startScroll = 0, moved = 0;
+    viewport.addEventListener('mousedown', (e) => {
+      // don't hijack clicks on tiles — only start drag from empty space or long press
+      isDown = true; startX = e.pageX; startScroll = viewport.scrollLeft; moved = 0;
+      viewport.style.cursor = 'grabbing';
+    });
+    window.addEventListener('mouseup', () => {
+      isDown = false;
+      viewport.style.cursor = '';
+    });
+    viewport.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      const dx = e.pageX - startX;
+      if (Math.abs(dx) > 4) {
+        moved = Math.abs(dx);
+        viewport.scrollLeft = startScroll - dx;
+        e.preventDefault();
+      }
+    });
+    // block click propagation on tiles if user was dragging
+    viewport.addEventListener('click', (e) => {
+      if (moved > 6) { e.stopPropagation(); e.preventDefault(); moved = 0; }
+    }, true);
+
+    // keyboard
+    car.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { scrollByTile(1); e.preventDefault(); }
+      if (e.key === 'ArrowLeft') { scrollByTile(-1); e.preventDefault(); }
+    });
+    car.setAttribute('tabindex', '-1');
+
+    // initial + on resize
+    update();
+    new ResizeObserver(update).observe(viewport);
+  });
+}
+
+/* ---------- Section jump buttons ---------- */
+let currentFilter = 'all';
+const filters = document.getElementById('filters');
+filters.addEventListener('click', (e) => {
+  const btn = e.target.closest('.filter');
+  if (!btn) return;
+  const target = document.getElementById(btn.dataset.jump);
+  if (target) window.scrollTo({ top: target.offsetTop - 60, behavior: 'smooth' });
+});
+
+function applyFilter() { /* no-op – sections replace filtering */ }
+
+/* ---------- Lightbox ---------- */
+const lb = document.getElementById('lightbox');
+const lbMedia = document.getElementById('lbMedia');
+const lbBody = document.getElementById('lbBody');
+let lbIdx = 0;
+
+function openLightbox(idx) {
+  lbIdx = idx;
+  const w = WORK[idx];
+  lb.classList.toggle('lb-article', w.cat === 'copy');
+  lbMedia.innerHTML = phFor(w);
+  // inject enlarged placeholder styling
+  const ph = lbMedia.querySelector('.ph, .art-thumb');
+  if (ph) { ph.style.position = 'absolute'; ph.style.inset = '0'; }
+
+  if (w.cat === 'copy') {
+    const body = wi(w, 'body') || w.body || [];
+    const bodyHTML = body.map(b => {
+      if (b.type === 'p') return `<p>${b.text}</p>`;
+      if (b.type === 'h') return `<h4>${b.text}</h4>`;
+      if (b.type === 'pull') return `<div class="lb-art-pull">${b.text}</div>`;
+      if (b.type === 'list') return `<ul>${b.items.map(it => `<li>${it}</li>`).join('')}</ul>`;
+      return '';
+    }).join('');
+    const tags = (w.tags || []).map(t => `<span>${t}</span>`).join('');
+    lbBody.innerHTML = `
+      <div class="lb-kicker">${wi(w,'kicker') || catLabel(w.cat)}</div>
+      <h3 class="lb-art-title">${wi(w,'title')}</h3>
+      <div class="lb-art-dek">${wi(w,'dek') || wi(w,'summary')}</div>
+      <div class="lb-art-byline">
+        <span><b>${wi(w,'client')}</b></span>
+        <span>${wi(w,'role')}</span>
+        <span>${wi(w,'year')}</span>
+        <span>${wi(w,'readtime') || ''}</span>
+      </div>
+      <div class="lb-art-body">${bodyHTML}</div>
+      ${tags ? `<div class="lb-art-tags">${tags}</div>` : ''}
+    `;
+  } else {
+    lbBody.innerHTML = `
+      <div class="eyebrow">${catLabel(w.cat)} · ${wi(w,'year')}</div>
+      <h3>${wi(w,'title')}</h3>
+      <p>${wi(w,'summary')}</p>
+      <div class="meta-grid">
+        <div><strong>${tr('lb_client')}</strong><span>${wi(w,'client')}</span></div>
+        <div><strong>${tr('lb_role')}</strong><span>${wi(w,'role')}</span></div>
+        <div><strong>${tr('lb_year')}</strong><span>${wi(w,'year')}</span></div>
+        <div><strong>${tr('lb_deliv')}</strong><span>${w.cat === 'graphics' ? tr('lb_d_graphics') : tr('lb_d_photo')}</span></div>
+      </div>
+    `;
+  }
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+document.getElementById('lbClose').addEventListener('click', closeLightbox);
+lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
+document.getElementById('lbPrev').addEventListener('click', () => {
+  // navigate within filtered set
+  const visible = WORK.map((w, i) => ({ w, i })).filter(({ w }) => currentFilter === 'all' || w.cat === currentFilter);
+  const pos = visible.findIndex(v => v.i === lbIdx);
+  const next = visible[(pos - 1 + visible.length) % visible.length];
+  openLightbox(next.i);
+});
+document.getElementById('lbNext').addEventListener('click', () => {
+  const visible = WORK.map((w, i) => ({ w, i })).filter(({ w }) => currentFilter === 'all' || w.cat === currentFilter);
+  const pos = visible.findIndex(v => v.i === lbIdx);
+  const next = visible[(pos + 1) % visible.length];
+  openLightbox(next.i);
+});
+document.addEventListener('keydown', (e) => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
+  if (e.key === 'ArrowRight') document.getElementById('lbNext').click();
+});
+
+/* ---------- Dark toggle ---------- */
+const modeToggle = document.getElementById('modeToggle');
+function applyDark(v) {
+  document.documentElement.classList.toggle('dark', v);
+  document.getElementById('modeLabel').textContent = v ? tr('mode_light') : tr('mode_dark');
+}
+modeToggle.addEventListener('click', () => {
+  const v = !document.documentElement.classList.contains('dark');
+  applyDark(v);
+  TWEAKS.dark = v;
+  persist({ dark: v });
+});
+
+/* ---------- Language toggle ---------- */
+const langToggle = document.getElementById('langToggle');
+if (langToggle) {
+  langToggle.addEventListener('click', () => {
+    TWEAKS.lang = TWEAKS.lang === 'pl' ? 'en' : 'pl';
+    persist({ lang: TWEAKS.lang });
+    applyI18n();
+    renderHero();
+    renderGrid();
+  });
+}
+
+/* ---------- i18n ---------- */
+const I18N = {
+  en: {
+    brand_role: 'Content Creator',
+    nav_work: 'Work', nav_about: 'About', nav_services: 'Services', nav_contact: 'Contact',
+    mode_dark: 'Dark', mode_light: 'Light',
+    cta_work: "Let's work together →",
+
+    hero_eyebrow_split: 'Martyna Delewska · Content Creator · 2026',
+    hero_headline_split: 'Copy, <em>graphics</em> & product shots that move the needle.',
+    hero_avail: '● Available for work',
+    hero_pill_copy: 'Copywriting', hero_pill_graphics: 'Ad graphics', hero_pill_photo: 'Product photography', hero_pill_mkt: 'Marketing', hero_pill_gads: 'Google Ads',
+    hero_meta_strong: 'Katowice, Poland · Open to remote collaborations',
+    hero_meta_sub: 'Content Specialist at AdWise · SEO Copywriter at Sonder · Dog IG 6k followers.',
+    hero_portrait_cap: 'Portrait · 4:5 placeholder',
+    hero_eyebrow_c: 'Martyna · Content Creator',
+    hero_headline_c: 'I write <em>copy</em> and design the <em>visuals</em> that carry it.',
+    hero_sub_c: 'Content Specialist at AdWise B2B Agency · SEO Copywriter at Sonder Services · Dog Instagram 6,000 followers.',
+    hero_avail_apr: '● Available April 2026',
+    hero_mar_eyebrow: 'Martyna Delewska · Portfolio 2026',
+    hero_foot_1a: 'Copy + design', hero_foot_1b: 'Double-threat creative',
+    hero_foot_2a: '6k followers', hero_foot_2b: 'Dog IG · pet brands',
+    hero_foot_3a: 'Since 2021', hero_foot_3b: 'Content & copy',
+    hero_ed_content: 'Copy · Design · Photo',
+    hero_ed_avail: 'Available for work',
+    hero_ed_hello: 'Hello, <em>I\'m Martyna Delewska!</em>',
+    hero_ed_sub: "I'm a Content Creator &amp; Copywriter — I make graphics, photos and copy that build community and drive sales. Content Specialist at AdWise, SEO Copywriter at Sonder Services, and the person behind a dog Instagram with 6,000 followers.",
+    hero_ed_b1: 'Hello!', hero_ed_b2: 'est. 2023',
+    hero_ed_open: '● Open to junior roles',
+    hero_ed_remote: 'Remote', hero_ed_free: 'Freelance',
+    ed_nav: ['01\u00a0Copywriting','02\u00a0Ad Graphics','03\u00a0Product Photo','04\u00a0Marketing','05\u00a0Social','06\u00a0Google Ads'],
+
+    about_eyebrow: 'About',
+    about_title: 'A content person <em>who sweats</em> the small stuff.',
+    about_p1: "I'm <em>Martyna Delewska</em> — a Content Creator &amp; Copywriter based in Katowice. I create graphics, photos and copy that build community and drive sales. I run my dog's Instagram (6,000 followers), partner with pet-friendly brands, and create content for a beauty salon.",
+    about_p2: "Currently Content Specialist at AdWise B2B Marketing Agency and SEO Copywriter at Sonder Services. Educated in aesthetic cosmetology (MA, Jagiellonian University) — I bring an eye for aesthetics to every brief.",
+    about_care: 'What I care about',
+    about_care_1: 'Copy that sounds human', about_care_2: 'Visuals that stop the scroll',
+    about_care_3: 'Briefs that become brands', about_care_4: 'Campaigns that actually ship',
+    about_now: 'Currently',
+    about_now_1: 'AdWise Agency — Content Specialist', about_now_2: 'Sonder Services — SEO Copywriter',
+    about_now_3: 'Dog Instagram — 6,000 followers', about_now_4: 'Strefa Piękna — Social Media & Copy',
+    about_toolkit: 'Toolkit', status_ongoing: 'Ongoing',
+
+    services_eyebrow: 'Services',
+    services_title: 'Four things I do <em>really well.</em>',
+    svc_1_num: '01 / Copywriting', svc_1_h: 'Words that earn the click.',
+    svc_1_p: "Landing pages, ad copy, captions, email — written in the brand's voice, tuned for conversion, and never stuffed with adjectives.",
+    svc_1_t1: 'Ads', svc_1_t2: 'Landing pages', svc_1_t3: 'Social',
+    svc_2_num: '02 / Marketing', svc_2_h: 'Campaigns from brief to launch.',
+    svc_2_p: "Ad strategy, audience research, test matrices, reporting. I've supported Google Ads specialists and know what creative the algorithm actually rewards.",
+    svc_3_num: '03 / Ad Graphics', svc_3_h: 'Static & motion that scrolls stop.',
+    svc_3_p: 'Meta, Google Display, Pinterest creative — on brand, sized for every placement, with enough versions to run a real A/B test.',
+    svc_4_num: '04 / Product Photography', svc_4_h: 'Product shots that feel like the brand.',
+    svc_4_p: 'Styled flat lays, lifestyle shots, pet-friendly product imagery — edited to match your grid and ready to drop into ads.',
+    svc_4_t2: 'Styling', svc_4_t3: 'Editing',
+
+    work_eyebrow: 'Selected Work',
+    work_title: "Recent things <em>I've made.</em>",
+    work_f_copy: 'Copy', work_f_graphics: 'Ad Graphics', work_f_photo: 'Photography',
+    wsh_copy_title: 'Copywriting <em>samples.</em>',
+    wsh_copy_sub: "Landing pages, ad copy, captions, email sequences — written in the brand's voice and tuned for conversion.",
+    wsh_graphics_title: 'Ad graphics <em>& campaigns.</em>',
+    wsh_graphics_sub: 'Meta, Google Display, Pinterest creative — on-brand, placement-sized, delivered with a proper test matrix.',
+    wsh_photo_title: 'Product <em>photography.</em>',
+    wsh_photo_sub: "Styled flat-lays, lifestyle shots and minimal still life — edited to match each brand's grid.",
+    wsh_pieces: '04 pieces',
+
+    contact_eyebrow: 'Contact',
+    contact_title: "Have a brief? <em>Let's talk.</em>",
+    contact_email: 'Email', contact_loc: 'Location', contact_loc_val: 'Katowice, Poland · Remote',
+    footer_built: 'Designed & built with care', footer_updated: 'Last updated — Apr 2026',
+
+    cat_copy: 'Copywriting', cat_graphics: 'Ad graphics', cat_photo: 'Photography',
+    lb_client: 'Client', lb_role: 'Role', lb_year: 'Year', lb_deliv: 'Deliverables',
+    lb_d_copy: 'Copy, headlines', lb_d_graphics: 'Static & motion', lb_d_photo: 'Photography',
+  },
+  pl: {
+    brand_role: 'Twórczyni treści',
+    nav_work: 'Projekty', nav_about: 'O mnie', nav_services: 'Usługi', nav_contact: 'Kontakt',
+    mode_dark: 'Ciemny', mode_light: 'Jasny',
+    cta_work: 'Zacznijmy współpracę →',
+
+    hero_eyebrow_split: 'Martyna · Twórczyni treści · 2026',
+    hero_headline_split: 'Copy, <em>grafika</em> i zdjęcia produktowe, które działają.',
+    hero_avail: '● Dostępna do pracy',
+    hero_pill_copy: 'Copywriting', hero_pill_graphics: 'Grafiki reklamowe', hero_pill_photo: 'Fotografia produktowa', hero_pill_mkt: 'Marketing', hero_pill_gads: 'Google Ads',
+    hero_meta_strong: 'Katowice, Polska · Otwarta na zdalne współprace',
+    hero_meta_sub: 'Content Specialist w AdWise · Copywriter SEO w Sonder · IG psa 6k obserwujących.',
+    hero_portrait_cap: 'Portret · szablon 4:5',
+    hero_eyebrow_c: 'Martyna · Twórczyni treści',
+    hero_headline_c: 'Piszę <em>copy</em> i projektuję <em>wizualia</em>, które je niosą.',
+    hero_sub_c: 'Content Specialist w AdWise · Copywriter SEO w Sonder Services · Instagram psa 6 000 obserwujących.',
+    hero_avail_apr: '● Dostępna od kwietnia 2026',
+    hero_mar_eyebrow: 'Martyna Delewska · Portfolio 2026',
+    hero_foot_1a: 'Copy + design', hero_foot_1b: 'Podwójne zagrożenie kreatywne',
+    hero_foot_2a: '6k obserwujących', hero_foot_2b: 'IG psa · marki pet',
+    hero_foot_3a: 'Od 2021', hero_foot_3b: 'Content & copy',
+    hero_ed_content: 'Copy · Design · Foto',
+    hero_ed_avail: 'Dostępna do pracy',
+    hero_ed_hello: 'Cześć, <em>jestem Martyna!</em>',
+    hero_ed_sub: 'Jestem Content Creatorką i Copywriterką — tworzę grafiki, zdjęcia i treści, które budują społeczność i sprzedają. Content Specialist w AdWise, Copywriter SEO w Sonder Services i autorka psiego Instagrama z 6 000 obserwujących.',
+    hero_ed_b1: 'Cześć!', hero_ed_b2: 'od 2023',
+    hero_ed_open: '● Otwarta na role juniorskie',
+    hero_ed_remote: 'Zdalnie', hero_ed_free: 'Freelance',
+    ed_nav: ['01\u00a0Copywriting','02\u00a0Grafika','03\u00a0Foto produktowe','04\u00a0Marketing','05\u00a0Social','06\u00a0Google Ads'],
+
+    about_eyebrow: 'O mnie',
+    about_title: 'Osoba od treści, <em>która dba</em> o szczegóły.',
+    about_p1: 'Jestem <em>Martyną Delewską</em> — Content Creatorką i Copywriterką z Katowic. Tworzę grafiki, zdjęcia i treści, które budują społeczność i sprzedają. Prowadzę Instagrama mojego psa (6 000 obserwujących), współpracuję z markami pet-friendly i tworzę treści dla salonu kosmetycznego.',
+    about_p2: 'Aktualnie Content Specialist w AdWise Agencja Marketingu B2B oraz Copywriter SEO w Sonder Services. Wykształcona w kosmetologii estetycznej (mgr, UJ) — do każdego briefu podchodzę z okiem estetki.',
+    about_care: 'Na czym mi zależy',
+    about_care_1: 'Copy, które brzmi jak człowiek', about_care_2: 'Wizualia, które zatrzymują scrolla',
+    about_care_3: 'Briefy, które stają się markami', about_care_4: 'Kampanie, które naprawdę ruszają',
+    about_now: 'Aktualnie',
+    about_now_1: 'AdWise Agency — Content Specialist', about_now_2: 'Sonder Services — Copywriter SEO',
+    about_now_3: 'Instagram psa — 6 000 obserwujących', about_now_4: 'Strefa Piękna — Social Media & Copy',
+    about_toolkit: 'Narzędzia', status_ongoing: 'W toku',
+
+    services_eyebrow: 'Usługi',
+    services_title: 'Cztery rzeczy, które robię <em>naprawdę dobrze.</em>',
+    svc_1_num: '01 / Copywriting', svc_1_h: 'Słowa, które zarabiają klik.',
+    svc_1_p: 'Strony docelowe, copy reklam, opisy, maile — w głosie marki, ustawione pod konwersję i bez waty przymiotników.',
+    svc_1_t1: 'Reklamy', svc_1_t2: 'Landing pages', svc_1_t3: 'Social',
+    svc_2_num: '02 / Marketing', svc_2_h: 'Kampanie od briefu do startu.',
+    svc_2_p: 'Strategia reklam, badanie odbiorców, matryce testów, raporty. Wspierałam specjalistów Google Ads i wiem, co algorytm naprawdę nagradza.',
+    svc_3_num: '03 / Grafiki reklamowe', svc_3_h: 'Statyka i motion, które zatrzymują scroll.',
+    svc_3_p: 'Kreacje pod Meta, Google Display i Pinterest — w marce, dopasowane do placementu, w kilku wariantach pod A/B.',
+    svc_4_num: '04 / Fotografia produktowa', svc_4_h: 'Ujęcia produktowe w klimacie marki.',
+    svc_4_p: 'Stylizowane flat laye, lifestyle, zdjęcia produktów pet-friendly — edytowane pod Twoją siatkę i gotowe do reklam.',
+    svc_4_t2: 'Stylizacja', svc_4_t3: 'Edycja',
+
+    work_eyebrow: 'Wybrane projekty',
+    work_title: 'Ostatnie rzeczy, <em>które zrobiłam.</em>',
+    work_f_copy: 'Copy', work_f_graphics: 'Grafiki', work_f_photo: 'Fotografia',
+    wsh_copy_title: 'Próbki <em>copywritingu.</em>',
+    wsh_copy_sub: 'Landing pages, copy reklam, opisy, sekwencje maili — w głosie marki i ustawione pod konwersję.',
+    wsh_graphics_title: 'Grafiki <em>i kampanie.</em>',
+    wsh_graphics_sub: 'Meta, Google Display, Pinterest — w marce, dopasowane do placementu, z solidną matrycą testów.',
+    wsh_photo_title: 'Fotografia <em>produktowa.</em>',
+    wsh_photo_sub: 'Stylizowane flat laye, lifestyle i minimalistyczny still life — edytowane pod siatkę każdej marki.',
+    wsh_pieces: '04 projekty',
+
+    contact_eyebrow: 'Kontakt',
+    contact_title: 'Masz brief? <em>Porozmawiajmy.</em>',
+    contact_email: 'E-mail', contact_loc: 'Lokalizacja', contact_loc_val: 'Katowice, Polska · Zdalnie',
+    footer_built: 'Zaprojektowane i zbudowane z sercem', footer_updated: 'Ostatnia aktualizacja — kwiecień 2026',
+
+    cat_copy: 'Copywriting', cat_graphics: 'Grafiki reklamowe', cat_photo: 'Fotografia',
+    lb_client: 'Klient', lb_role: 'Rola', lb_year: 'Rok', lb_deliv: 'Dostarczone',
+    lb_d_copy: 'Copy, nagłówki', lb_d_graphics: 'Statyka i motion', lb_d_photo: 'Fotografia',
+  }
+};
+
+/* Work items have `i18n` keys for localized fields */
+function tr(key) { return (I18N[TWEAKS.lang] && I18N[TWEAKS.lang][key]) || (I18N.en[key]) || key; }
+
+function applyI18n() {
+  document.documentElement.setAttribute('lang', TWEAKS.lang);
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const val = tr(key);
+    if (el.hasAttribute('data-i18n-html')) el.innerHTML = val;
+    else el.textContent = val;
+  });
+  // mode label reflects current state
+  const modeLabel = document.getElementById('modeLabel');
+  if (modeLabel) modeLabel.textContent = document.documentElement.classList.contains('dark') ? tr('mode_light') : tr('mode_dark');
+  const langLabel = document.getElementById('langLabel');
+  if (langLabel) langLabel.innerHTML = TWEAKS.lang === 'en' ? '<b>EN</b> / PL' : 'EN / <b>PL</b>';
+}
+
+/* ---------- Hero renderer ---------- */
+function renderHero() {
+  const el = document.getElementById('hero');
+  el.className = 'hero ' + TWEAKS.hero;
+
+  if (TWEAKS.hero === 'split') {
+    el.innerHTML = `
+      <div class="reveal" style="display:flex; flex-direction:column; gap: 20px;">
+        <div class="eyebrow">${tr('hero_eyebrow_split')}</div>
+        <h1 class="hero-headline">${tr('hero_headline_split')}</h1>
+        <div class="hero-pills" style="margin-top: 12px;">
+          <span class="pill solid">${tr('hero_avail')}</span>
+          <span class="pill">${tr('hero_pill_copy')}</span>
+          <span class="pill">${tr('hero_pill_graphics')}</span>
+          <span class="pill">${tr('hero_pill_photo')}</span>
+          <span class="pill">${tr('hero_pill_mkt')}</span>
+        </div>
+      </div>
+      <div class="hero-meta reveal">
+        <div class="hero-portrait">
+          <div class="portrait-inner"><img src="assets/MartPortrait-new.png" alt="Martyna"></div>
+          <strong>${tr('hero_meta_strong')}</strong>
+          <span>${tr('hero_meta_sub')}</span>
+        </div>
+      </div>
+    `;
+  }
+  else if (TWEAKS.hero === 'centered') {
+    el.innerHTML = `
+      <div class="hero-stage reveal">
+        <div class="eyebrow">${tr('hero_eyebrow_c')}</div>
+        <div class="hero-avatar"><div class="portrait-inner" style="inset:0;"><img src="assets/MartPortrait-new.png" alt="Martyna"></div></div>
+        <h1 class="hero-headline">${tr('hero_headline_c')}</h1>
+        <p class="hero-sub">${tr('hero_sub_c')}</p>
+        <div class="hero-row">
+          <span class="pill solid">${tr('hero_avail_apr')}</span>
+          <span class="pill">${tr('hero_pill_copy')}</span>
+          <span class="pill">${tr('hero_pill_graphics')}</span>
+          <span class="pill">${tr('hero_pill_photo')}</span>
+          <span class="pill">${tr('hero_pill_gads')}</span>
+        </div>
+      </div>
+    `;
+  }
+  else if (TWEAKS.hero === 'editorial') {
+    el.innerHTML = `
+      <div class="ed-hello reveal">
+        <div class="ed-portrait">
+          <div class="portrait-inner"><img src="assets/MartPortrait-new.png" alt="Martyna"></div>
+          <div class="ed-badge b1">${tr('hero_ed_b1')}</div>
+          <div class="ed-badge b2">${tr('hero_ed_b2')}</div>
+        </div>
+        <div class="ed-hello-copy">
+          <h1 class="ed-headline">${tr('hero_ed_hello')}</h1>
+          <p class="ed-sub">${tr('hero_ed_sub')}</p>
+          <div class="ed-pills">
+            <span class="pill solid">${tr('hero_ed_open')}</span>
+            <span class="pill">${tr('hero_ed_remote')}</span>
+            <span class="pill">${tr('hero_ed_free')}</span>
+          </div>
+          <div class="ed-search">
+            <span class="ed-search-icon">✉</span>
+            <span>martdelewska@gmail.com</span>
+            <span class="ed-search-cta">→</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // re-observe
+  el.querySelectorAll('.reveal').forEach(x => io.observe(x));
+}
+
+/* ---------- Reveal ---------- */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+/* ---------- Tweaks ---------- */
+function applyTweaks() {
+  document.documentElement.setAttribute('data-theme', TWEAKS.theme);
+  document.documentElement.setAttribute('data-fontpair', TWEAKS.fontPair);
+  // accent: set both --accent and --accent-ink (black/white based on luminance)
+  document.documentElement.style.setProperty('--accent', TWEAKS.accent);
+  document.documentElement.style.setProperty('--accent-ink', pickAccentInk(TWEAKS.accent));
+  applyDark(TWEAKS.dark);
+  // mark pressed states
+  document.querySelectorAll('.tweaks-panel [data-group]').forEach(group => {
+    const name = group.dataset.group;
+    group.querySelectorAll('[data-value]').forEach(b => {
+      b.setAttribute('aria-pressed', b.dataset.value === TWEAKS[name] ? 'true' : 'false');
+    });
+  });
+  renderHero();
+}
+
+function pickAccentInk(hex) {
+  const h = hex.replace('#','');
+  const r = parseInt(h.slice(0,2),16)/255;
+  const g = parseInt(h.slice(2,4),16)/255;
+  const b = parseInt(h.slice(4,6),16)/255;
+  const l = 0.2126*r + 0.7152*g + 0.0722*b;
+  return l > 0.6 ? '#111' : '#fff';
+}
+
+function persist(edits) {
+  try {
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+  } catch (e) {}
+}
+
+document.querySelectorAll('.tweaks-panel [data-group]').forEach(group => {
+  const name = group.dataset.group;
+  group.querySelectorAll('[data-value]').forEach(b => {
+    b.addEventListener('click', () => {
+      TWEAKS[name] = b.dataset.value;
+      const edits = {}; edits[name] = b.dataset.value;
+      applyTweaks();
+      persist(edits);
+    });
+  });
+});
+
+/* Tweaks panel activation via host */
+const panel = document.getElementById('tweaksPanel');
+document.getElementById('tweaksClose').addEventListener('click', () => panel.classList.remove('open'));
+window.addEventListener('message', (e) => {
+  const t = e.data && e.data.type;
+  if (t === '__activate_edit_mode') panel.classList.add('open');
+  if (t === '__deactivate_edit_mode') panel.classList.remove('open');
+});
+window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+/* ---------- Init ---------- */
+renderGrid();
+applyTweaks();
+applyI18n();
+
+// observe existing reveals
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// nav scroll border
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 12);
+}, { passive: true });
+
+// smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const id = a.getAttribute('href').slice(1);
+    const t = document.getElementById(id);
+    if (!t) return;
+    e.preventDefault();
+    window.scrollTo({ top: t.offsetTop - 60, behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
